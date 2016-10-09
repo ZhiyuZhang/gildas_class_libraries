@@ -1,3 +1,10 @@
+! Analise a list of spectra, by its Tsys and rms noise levels
+! USAGE: 
+! file in xxx.30m
+! find
+! @ ana  
+! 
+
 define real count[found] bchan[found] maxsig tsy[found]
 for i 1 to found
 get idx%num[i]
