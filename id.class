@@ -1,0 +1,171 @@
+define real z
+let z &1 
+
+draw mole  97980.953/(1+z)  CS21
+draw mole  96412.950/(1+z)  C34S21
+draw mole  96750.000/(1+z)  CH3OH
+draw mole  97300.000/(1+z)  OCS 
+draw mole  97580.000/(1+z)  OCS
+draw mole  99300.000/(1+z)  SO
+draw mole  95915.000/(1+z)  CH3OH 
+draw mole  95170.000/(1+z)  CH3OH
+draw mole  96261.16/(1+z)   H2O 
+draw mole  96342.525/(1+z)  C6H
+draw mole  96167.640/(1+z)  CH3OCHO
+draw mole  100076.386/(1+z) HC3N11-10
+draw mole  100029.565/(1+z) SO,N,J=5,4-4,4
+draw mole  99299.905/(1+z)  SO,N,J=2,3-1,2
+draw mole  87446.512/(1+z)  C2H 
+draw mole  87328.624/(1+z)  C2H 
+draw mole  87767.302/(1+z) HCCN 
+draw mole  87863.630/(1+z) HC5N 
+draw mole  87925.238/(1+z) HNCO  
+draw mole  83621.8782544/(1+z) SO2
+draw mole  81881.463/(1+z)    HC3N9-8
+draw mole  83621.8782544/(1+z) SO2
+draw mole  88631.8473/(1+z)  HCN10
+draw mole  89188.526/(1+z)   HCO+
+draw mole  90663.564/(1+z)   HNC10
+
+
+draw mole  90978.989/(1+z)   HCCCN
+draw mole  91470./(1+z)      (CH3)2O
+draw mole  93172./(1+z)      N2H+
+draw mole  85038.044/(1+z) SiO2-1v3
+draw mole  85640.452/(1+z) SiO2-1v2
+draw mole  86243.430/(1+z) SiO2-1v1
+draw mole  86846.995/(1+z) SiO2-1v0
+
+
+
+
+
+
+draw molecule 113191.317/(1+z) "CNJ=1/2-1/2 F=1/2-3/2"
+draw mole     113490.982/(1+z) "CNJ=3/2-1/2 F=5/2-3/2"    
+
+
+draw mole   23694.5060/(z+1) NH3_11 
+draw mole   23722.6336/(z+1) NH3_22 
+draw mole   23870.1296/(z+1) NH3_33 
+draw mole   24139.4169/(z+1) NH3_44
+draw mole   24532.9887/(1+z) NH3_55 
+draw mole   25056.025/(1+z)  NH3_66 
+
+draw mole   86754.288/(1+z)  H13COP1-0
+draw mole   259011.787/(1+z) H13CN3-2
+draw mole   260255.342/(1+z) H13COP3-2
+draw mole   258156.996/(1+z) HC15N3-2
+draw mole   261263.39/(1+z)  HN13C3-2
+draw mole  344200.109/(1+z)  HC15N4-3
+
+
+draw mole   22079.2040/(1+z) HC9N 
+draw mole   21981.4706/(1+z) HNCO,F=2-1 
+draw mole   21980.5453/(1+z) HNCO,F=1-0 
+draw mole   21982.0854/(1+z) HNCO,F=1-1 
+draw mole   22029.7400/(1+z) C6H_ 
+draw mole   22235.1204/(1+z) H2O,F5-4 
+draw mole   22095.5270/(1+z) CH3CONH2  
+
+
+draw mole  90663.564/(1+z)   HNC10
+draw mole  181324.73/(1+z)   HNC21 
+draw mole  271981.111/(1+z)  HNC32
+draw mole  362630.30/(1+z)   HNC43
+
+draw mole  265886.1800/(1+z) HCN32
+draw mole  267556.190/(1+z) HCO+32
+
+draw mole 354505.4759/(1+z) HCN43 
+draw mole 356734.2880/(1+z) HCO+43
+draw mole 492161/(1+z)     CI1-0 
+draw mole 492161/(1+z)     CI1-0 
+draw mole 345795.9899/(1+z) CO32
+
+
+draw molecule 356256./(1+z)   HCNv2=1 
+draw molecule 355566./(1+z)   HCNv7=1 
+draw molecule 362630.3/(1+z)  HNC4-3       
+draw molecule 380197.4/(1+z)  H2O4-3       
+draw molecule 390747./(1+z)   SiO9-8       
+draw molecule 391870./(1+z)   CS8-7        
+draw molecule 433750./(1+z)   C34S9-8 
+draw molecule 435113.37/(1+z) CH3OH   
+
+draw molecule 443952.93/(1+z) LiH1-0
+draw molecule 434120.3/(1+z)  SiO10-9      
+draw molecule 437150.8/(1+z)  H2O7-6(7_53-6_60)       
+draw molecule 439150.8/(1+z)  H2O6-5(6_43-5_50)       
+draw molecule 440784./(1+z)   13CO4-3      
+draw molecule 440850./(1+z)   CS9-8        
+draw molecule 439089./(1+z)   C18O4-3      
+draw molecule 443132./(1+z)   HCN5-4       
+draw molecule 445918./(1+z)   HCO+5-4      
+draw molecule 453288./(1+z)   HNC5-4       
+draw molecule 455160.80/(1+z)   SO221-21    
+draw molecule 455617.93/(1+z)   CH3OH 6-5    
+draw molecule 455779.86/(1+z)   SO211-10    
+draw molecule 456271.44/(1+z)   CH3OH 18-17  
+draw molecule 456359.25/(1+z)   SO219-19    
+draw molecule 457006.90/(1+z)   CH3OH 11-11  
+draw molecule 457325.93/(1+z)   SO216-16    
+draw molecule 457472.64/(1+z)   SO217-17    
+draw molecule 458389.95/(1+z)   SO215-15    
+draw molecule 458536.36/(1+z)   SO214-14    
+draw molecule 459076.69/(1+z)   SO213-13    
+draw molecule 459534.26/(1+z)   SO211-11    
+draw molecule 459569.87/(1+z)   CH3CN25-24  
+draw molecule 459631.41/(1+z)   CH3CN25-24  
+draw molecule 459678.27/(1+z)   CH3CN25-24  
+draw molecule 459706.88/(1+z)   CH3CN25-24  
+draw molecule 459801.217/(1+z)   SO2K=5-4    
+draw molecule 459881.164/(1+z)   SO2K=5-4    
+draw molecule 459942.528/(1+z)   SO2K=5-4    
+draw molecule 459983.548/(1+z)   SO2K=5-4    
+draw molecule 461047.68/(1+z)    CO4-3       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+draw mole  	342882.85700/(1+z)  CS76
+draw mole   244935.55600/(1+z)  CS54
+draw mole   146969.02500/(1+z)  CS32  
+
+
+
+
+draw mole  144600.000/(1+z)  C34S32
+draw mole  145100.000/(1+z)  CH3OH/C3H2
+draw mole  145600.000/(1+z)  H2CO/HC3N
+draw mole  146969.029/(1+z)  CS32 
+draw mole  140800./(1+z)     H2CO
+
+draw mole (frequency+(image-115271.202/(1+z))) CO10
+
+if (velo_step*FREQ_STEP).lt.0 then
+draw mole (frequency+(image-115271.202/(1+z))) CO10
+draw mole (frequency+(image-110201.354/(1+z))) 13CO10
+draw mole (frequency+(image-109.782176/(1+z))) C18O10
+draw mole (frequency+(image-2*115271.202/(1+z))) CO21
+draw mole (frequency+(image-2*110201.354/(1+z))) 13CO21
+draw mole (frequency+(image-219.560358/(1+z))) C18O21
+
+else
+draw mole (frequency-(image-115271.202/(1+z))) CO10
+draw mole (frequency-(image-110201.354/(1+z))) 13CO10
+draw mole (frequency-(image-2*115271.202/(1+z))) CO21
+draw mole (frequency-(image-2*110201.354/(1+z))) 13CO21
+end if

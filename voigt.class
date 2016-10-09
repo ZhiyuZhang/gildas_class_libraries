@@ -1,0 +1,80 @@
+!! Fit a voigt profile. 20 Nov. 2012 
+!! zyzhang AT pmo DOT ac DOT cn 
+
+set unit v 
+set mod y t
+pl
+set win 
+SET VARIABLE  BASE R 
+set variable gauss R
+bas
+line 1
+min
+vis
+
+define double tmp1 tmp2  
+define double v0 fwhm  
+let v0  NFIT[2]
+let fwhm NFIT[3]
+define double par1 par2 par3 par4 par5
+define integ num1 num2 
+let num1 (W1[1]-velocity)/velo_step+reference
+let num2 (W2[1]-velocity)/velo_step+reference
+define double xx['abs(num1-num2)+1'] yy['abs(num1-num2)+1'] 
+if num1.gt.num2 then 
+let tmp1 num1 
+let num1 num2
+let num2 tmp1 
+endif   
+
+say 'num1'  'num2'
+
+let xx rx[num1:num2]
+let yy ry[num1:num2]
+compute tmp1 min yy
+compute tmp2 max yy
+!set mod y  'tmp1-abs(tmp1)*0.01' 'tmp2+abs(tmp2)*0.02' 
+set mod y t
+pl
+
+mfit yy=&C/&A*exp(-0.5*((xx-&B)/&A)^2)*&D/((xx-&B)^2+&D^2)+&E /start fwhm v0 -10 10 0 /method  powel !/step 0.5 0.5 0.1 0.1
+
+!pause 
+let yy MFIT%PAR[03]/MFIT%PAR[01]*EXP(-0.5*((xx-MFIT%PAR[02])/MFIT%PAR[01])^2)*MFIT%PAR[04]/((xx-MFIT%PAR[02])^2+MFIT%PAR[04]^2)+MFIT%PAR[05]
+
+let ry[num1:num2] yy 
+!set mod x num1 num2 
+!model yy xx /regular  
+spec /pen 2
+!model MFIT%RES xx /regular  
+let ry[num1:num2]  MFIT%RES
+spec /pen 1  
+
+let par1 MFIT%PAR[01] 
+let par2 MFIT%PAR[02] 
+let par3 MFIT%PAR[03] 
+let par4 MFIT%PAR[04] 
+let par5 MFIT%PAR[04] 
+
+!for i 1 to 5 
+!cl seg
+!cl seg 
+!get 
+!bas
+!let xx rx[num1:num2]
+!let yy ry[num1:num2]
+!
+!mfit yy=&C/&A*exp(-0.5*((xx-&B)/&A)^2)*&D/((xx-&B)^2+&D^2)+&E /start par1 par2 par3 par4 par5 
+!let yy MFIT%PAR[03]/MFIT%PAR[01]*EXP(-0.5*((xx-MFIT%PAR[02])/MFIT%PAR[01])^2)*MFIT%PAR[04]/((xx-MFIT%PAR[02])^2+MFIT%PAR[04]^2)+MFIT%PAR[05]
+!let ry[num1:num2] yy 
+!!set mod x num1 num2 
+!!model yy xx /regular  
+!spec /pen 2
+!!model MFIT%RES xx /regular  
+!let ry[num1:num2]  MFIT%RES
+!spec /pen 1  
+!pause
+!next
+set mod y t 
+
+

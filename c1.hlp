@@ -1,0 +1,12 @@
+1 C1
+  C1 is designed to fill the bad channels with the rms noise of all other channels. 
+       C1 Arg1 
+
+       Arg1 is the cutoff limit of sigma.
+
+       EXAMPLE:
+       c1 5
+
+       It fills bad channels with a random noise within 1 sigma, and the definition
+       for bad channels is: the channels deviate more than 5 sigma from baseline.  
+1 ENDOFHELP

@@ -1,0 +1,24 @@
+1 RSPEC 
+       
+       The aim of this script is to calculate a class spectral line file from a datacube
+       average spectra centering with the pixel inputed as 'x pixel' and 'y pixel'
+       The pixel range for averaging MUST be an odd number. If you input 5, it means
+       that a length of side of 5 pixels will be selected as a rectangle box for the
+       averaging.  by Zhiyu Zhang  (zyzhang@pmo.ac.cn) Sept. 12 2010 4:30 am
+       revised at Aug. 26 2011  15:30; update automatic line name and frequency;
+       velocity bug was amended; input language:
+       
+       USAGE:
+  
+       RSPEC INPUT.fits Xpixel Ypixel Pixel_range Outputname(.apex)
+       
+       example:
+ 
+       rspec co32_all_cube_con.fits 17 28 5 co32_1
+
+       This is a detailed description of RSPEC.
+1 ENDOFHELP
+
+
+
+

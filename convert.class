@@ -1,0 +1,30 @@
+define double restfreq 
+define integ scan1 scan2 win 
+define char*12 num name 
+let win   &1
+let name  &2
+let scan1 &3 
+let scan2 &4
+sic del  'name'_'win'.gbt 
+file out 'name'_'win'.gbt m 
+
+for i scan1 to scan2  
+column x 1 y 2 /file  'name'_'win'_'i'.txt /line 4  
+model y  /XAXIS  1024.5  47000  390.625 freq 
+pl
+let source 'name' 
+let restfreq 47000
+let time 1
+modi freq restfreq
+let freq_step 0.390625
+let velo_step 2.44
+file out  'name'_'win'.gbt  
+write i 
+
+file in  'name'_'win'.gbt  
+find
+get i 
+set mod x -2300 2300
+pl
+!pause
+next

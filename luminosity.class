@@ -1,0 +1,10 @@
+define double  lum redshift ldistance freq w jyk 
+!!Say "please input  redshift, luminosity distance (Mpc), rest frequency (GHz), integrated line intensity (K km/s), and Jy/K factor " 
+
+let redshift &1
+let ldistance &2 
+let freq &3 
+let w &4
+let jyk &5 
+let lum 3.25*1e7*(freq/(1+redshift))^(-2)*ldistance^2*(1+redshift)^(-3)*w*jyk
+say 'lum'  "K km/s pc^2" 

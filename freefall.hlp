@@ -1,0 +1,19 @@
+1 FREEFALL 
+      USAGE:  
+      FREEFALL DENSITY MOLECULAR_WEIGHT  
+      Args are: Gas Density, Molecular Weight 
+      
+      AIM:
+      calculate Free Fall Time Scale in s and yr. 
+      Caution: 
+      HI has molecular weight 1, and H2 has molecular weight 2 
+
+      Do NOT use CO/HCN/... molecular weight because you are calculating 
+      molecular/atomic gas free fall time
+
+      EXAMPLE: 
+        
+      luminosity redshift lum_dist  rest_freq  Int_intensity Jy/k
+      freefall   1e5 2  
+       
+1 ENDOFHELP 

@@ -1,0 +1,5 @@
+1 VLOOP 
+       VLOOP Arg1 Arg2 [Arg3]
+
+       This is a detailed description of MYCOMMAND.
+1 ENDOFHELP

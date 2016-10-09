@@ -1,0 +1,21 @@
+1 TTAG 
+       TTAG  
+       The aim of this script is to qualify spectra in a big index. 
+       It is an interactive program. and will generate a tagged 
+       spectral data with 9 levels, which helps to sort the final
+       weighting of the final spectral averaging.  
+       
+       USAGE:
+      
+       load a bunch of lines, set windows and run it.  
+       TTAG  
+       example:
+ 
+       TTAG 
+
+       This is a detailed description of TTAG.
+1 ENDOFHELP
+
+
+
+

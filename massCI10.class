@@ -1,0 +1,26 @@
+!!! The aim of this script is to calculate molecular mass from CI 1-0 luminosity under LTE assumptions.  
+!!! revised at 01 Sep.  2013  15:30; 
+!!! Formulae are from Weiß et al. 2005
+!!   ciMass: CI mass
+!!   H2Mass: H2 mass 
+!!   Lci10 line luminosity  of CI1-0 in Kkm/spc-2
+!!   Tex:  excitation temperature 
+!!   T1 and T2 are energies above the ground state for CI 1-0 
+!!   Q: partition function of three energy system 
+!!! useage:  
+!!! 
+!!! massCI10 Tex   L'(CI1-0)   
+
+define double ciMass Lci10  Tex  T1 T2 Q H2Mass
+let T1 23.6  ! K; energy above the ground state for CI 1-0 
+let T2 62.5  ! K; energy above the ground state for CI 2-1 
+
+let Tex &1
+let Lci10 &2
+
+let Q (1.+3.*exp(-1*T1/Tex)+5*exp(-1*T2/Tex))
+let ciMass 5.706e-4*Q*1/3*exp(23.6/Tex)*Lci10
+let h2mass cimass/5e-5/6
+
+say "M(CI)=" 'ciMass' "Msun"
+say "M(H2)=" 'H2Mass' "Msun"

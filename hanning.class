@@ -1,0 +1,28 @@
+!!!!  USEAGE
+!!!!  @ hanning.class !inputdata.30m hanning.30m
+
+!define char input*30 hanning*30
+!define double tmp1 tmp2
+!let input &1
+!let hanning &2
+!file in  'input'       !  inputdata.30m
+!sic del  'hanning'     !         hanning.30m
+!file out 'hanning' m   ! hanning.30m m
+!find
+!for i 1 to found
+!get i          !     dx%num[k]
+
+define double ryy ryl ryr  /like ry
+
+let ryl[2:'channels']   ry[1:'channels-1']
+let ryr[1:'channels-1'] ry[2:'channels']
+let ryy ry 
+
+let ry (ryy/2+ryl/4+ryr/4)
+
+!write i
+del /var ryy ryl ryr
+
+pl
+
+!next

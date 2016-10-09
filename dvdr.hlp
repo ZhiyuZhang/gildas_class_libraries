@@ -1,0 +1,20 @@
+1 DVDR 
+       DVDR alpha density
+       The aim of this script is to calculate the velocity gradient for a virialized gas, for a given volume H2 density.
+       revised at 17 Mar.  2015
+       Formulae are from Papadopoulos et al. 1999 ApJ 516 114
+
+        alpha:  geometry of molecular cloud from 0.25 ~ 2.5, depending on the density profile (see Bryant & Scoville 1996)
+        density: volume density of H2 of the molecular cloud, in unit of cm-3.
+
+       useage:
+       
+       dvdr  alpha density
+
+       example:
+
+       dvdr 2.5 1e4
+
+       This is a detailed description of DVDR.
+1 ENDOFHELP
+

@@ -1,0 +1,13 @@
+1 ERROR 
+       ERROR Arg1 Arg2 Arg3 Arg4 
+      
+      ERROR is to calculate errors of ratios  
+      X=A/B with errA and errB
+      Input: A errA B errB
+      output: X and errX"
+      EXAMPLE:
+      
+      error A errA B errB 
+      error 20.1 0.2 12.2 0.5 
+
+1 ENDOFHELP

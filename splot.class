@@ -1,0 +1,6 @@
+pl
+cl
+las\box
+las\spec
+ANALYSE\DRAW  t 5 13.5 'source'
+!ANALYSE\DRAW  t 12 16.5 "Rest Frequency (MHz)"

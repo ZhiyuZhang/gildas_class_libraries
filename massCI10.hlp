@@ -1,0 +1,16 @@
+1 MASSCI10
+       MASSCI10 Tex  LCI10 
+       The aim of this script is to calculate molecular mass from CI 1-0 luminosity under LTE assumptions.
+       Formulae are from Weiß et al. 2005 
+       
+       by Zhiyu Zhang  (zyzhang@pmo.ac.cn)  01 Sept. 2013 
+
+       USAGE:
+       massCI10 Tex   L'(CI1-0)
+ 
+       This is a detailed description of MASSCI10.
+1 ENDOFHELP
+
+
+
+

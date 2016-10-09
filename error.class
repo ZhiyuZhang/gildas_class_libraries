@@ -1,0 +1,16 @@
+define real A errA B errB X errX
+say "X=A/B with errA and errB"
+say "Input  :  error  A errA B errB"
+say "output will be X and errX"
+say "please input A"
+let A &1 
+say "please input errA"
+let errA &2 
+say "Please input B"
+let B &3
+say "please input errB"
+let errB &4
+
+let X A/B
+let errX   A/B*sqrt(errA^2/A^2+errB^2/B^2)
+say "Output :"  "X=" 'X'  "errX" 'errX'

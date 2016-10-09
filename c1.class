@@ -1,0 +1,15 @@
+define real sig1 num 
+say "please input num of sigma, for example, 5 (sigma)"
+let num &1
+let sig1 0
+bas 0
+for /while sig1.ne.sigma
+base
+let sig1 sigma
+let ry[j] =  random(sigma) /where abs(ry).gt.(num*sigma)
+
+pl
+bas
+say 'sig1'
+say 'sigma'
+next

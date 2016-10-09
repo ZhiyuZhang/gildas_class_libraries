@@ -1,0 +1,17 @@
+define double Free_Fall_Time  Density Molecular_Weight Proton_Mass Gravity PI 
+!!Say "please input  Gas Density (particle per cm-3) , Molecular Weight ( HI 1, H2 2)" 
+
+let Density &1
+let Molecular_Weight &2 
+let Proton_Mass 1.67262178D-30   ! gram       from Wikipedia 
+let Gravity 6.674D-8             ! cm3g-1s-2 from Wikipedia
+let PI 3.14159265359 
+let Density Density*Molecular_Weight*Proton_Mass 
+say "Density is" 'Density' "g/cm3"
+let Free_Fall_Time 1/4*sqrt((3*PI)/(2*Gravity*Density))
+
+say "Free Fall Time is:"  'Free_Fall_Time' "s"              
+say "               or:"  'Free_Fall_Time/3600/24/365' "yr" 
+
+
+

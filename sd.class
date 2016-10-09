@@ -1,0 +1,15 @@
+!!  standard deviation 
+!! --- pmozhang@gmail.com 
+
+define int min max   ! channel range for analysis  
+define double sd 
+let min &1
+let max &2 
+
+
+
+let sd  sqrt( )  
+
+analyse\draw text 21 13 'nint(area*100)/100'
+analyse\draw text 21 14 'nint(sigma*(w2[1]-w1[1])/sqrt(abs((w2[1]-w1[1])/velo_step))*1000)/1000'
+analyse\draw window

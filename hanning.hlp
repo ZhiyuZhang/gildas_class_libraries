@@ -1,0 +1,18 @@
+1 HANNING 
+       HANNING 
+       Hanning smooth in spectral domain, with hanning -3
+
+       USAGE:
+  
+       
+       example:
+       
+       hanning 
+       
+
+       This is a detailed description of HANNING.
+1 ENDOFHELP
+
+
+
+

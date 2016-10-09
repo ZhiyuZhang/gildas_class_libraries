@@ -1,0 +1,2 @@
+#!/bin/bash -f
+more init.dat >> ~/.gag/init_ext  

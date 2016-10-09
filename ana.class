@@ -1,0 +1,43 @@
+define real count[found] bchan[found] maxsig tsy[found]
+for i 1 to found
+get idx%num[i]
+bas
+let count[i] sigma
+let bchan[i] i
+let tsy[i] tsys
+say "progress" 'i/found*100.' "% is done"  /format a15 f7.2 a10
+next
+
+compute maxsig max count
+
+set mod x 0 found
+set mod y 0 maxsig
+cl
+box n 
+axis xl
+pen 2
+points bchan  count
+pen 0
+
+dra t 5 10 "rms curve"
+pause
+cl
+
+compute maxsig max tsy 
+
+set mod x 0 found
+set mod y 0 maxsig
+cl
+box n 
+axis xl
+pen 2
+points bchan tsy 
+pen 0
+
+dra t 5 10 "Tsys curve"
+pause
+
+
+set mod x t
+set mod y t
+

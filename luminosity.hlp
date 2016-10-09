@@ -1,0 +1,17 @@
+1 LUMINOSITY
+      USAGE:  
+      LUMINOSITY Arg1 Arg2 Arg3 Arg4  
+      Args are: redshift, luminosity distance (Mpc), rest frequency (GHz), integrated line 
+      intensity in Ta* or Tmb (K km/s), and the corresponding Jy/K factor
+      
+      AIM:
+      calculate line luminosity in unit of K km/s/pc-2  
+      equation from Solomon and Vanden Bout 2005, ARA&A, 43, 677
+      
+      EXAMPLE: NGC6240 CS 2-1 IRAM 30m
+        
+      luminosity redshift lum_dist  rest_freq  Int_intensity Jy/k
+      luminosity 0.024480 105.      97.980953   1.23         6.0   (Ta*) 
+      luminosity 0.024480 105.      97.980953   1.63         3.907 (Tmb) 
+       
+1 ENDOFHELP 

@@ -1,0 +1,16 @@
+!!! The aim of this script is to calculate the velocity gradient for a virialized gas, for a given volume H2 density. 
+!!! revised at 17 Mar.  2015  
+!!! Formulae are from Papadopoulos et al. 1999 ApJ 516 114 
+!!   alpha:  geometry of molecular cloud 
+!!   density: volume density of H2 of the molecular cloud  
+!!! useage:
+!!!
+!!! dvdr  alpha density  
+
+define double alpha density dvdr 
+let alpha &1
+let density &2
+
+let dvdr 0.65*(alpha^0.5)*(density/1e3)^0.5 
+
+say "dvdr (virialized)= " 'dvdr' "  km/s/pc"

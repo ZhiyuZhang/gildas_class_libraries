@@ -1,0 +1,21 @@
+1 ID 
+       ID Arg1 
+       The aim of this script is to IDentify molecular lines in a spectrum       
+       It can also handle the strong lines in the image frequency. 
+       But NOTE that you need to keep the original header information of the
+       image frequency.
+
+       USAGE:
+  
+       id redshift  
+       
+       example:
+ 
+       id 0.0012  
+
+       This is a detailed description of ID.
+1 ENDOFHELP
+
+
+
+
