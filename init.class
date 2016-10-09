@@ -13,31 +13,18 @@ set no
 sic edit vi
 g\set font DUPLEX
 define command vloop     "@/data/scripts/class_extensions/vloop.class" "/data/scripts/class_extensions/vloop.hlp" 
-define command id "@/data/scripts/class_extensions/id.class" "/data/scripts/class_extensions/id.hlp" 
-define command ttag "@/data/scripts/class_extensions/tag.class" "/data/scripts/class_extensions/tag.hlp" 
-define command rspec "@/data/scripts/class_extensions/rspec.class" "/data/scripts/class_extensions/rspec.hlp" 
-define command rrms "@/data/scripts/class_extensions/rrms.class"
-define command c1 "@/data/scripts/class_extensions/c1.class" "/data/scripts/class_extensions/c1.hlp"
-define command c2 "@/data/scripts/class_extensions/c2.class" !"/data/scripts/class_extensions/c1.hlp"
-define command ana  "@/data/scripts/class_extensions/ana.class"
-define command wout "@/data/scripts/class_extensions/wout.class"
+define command id        "@/data/scripts/class_extensions/id.class" "/data/scripts/class_extensions/id.hlp" 
+define command ttag      "@/data/scripts/class_extensions/tag.class" "/data/scripts/class_extensions/tag.hlp" 
+define command rspec     "@/data/scripts/class_extensions/rspec.class" "/data/scripts/class_extensions/rspec.hlp" 
+define command rrms      "@/data/scripts/class_extensions/rrms.class"
+define command c1        "@/data/scripts/class_extensions/c1.class" "/data/scripts/class_extensions/c1.hlp"
+define command c2        "@/data/scripts/class_extensions/c2.class" !"/data/scripts/class_extensions/c1.hlp"
+define command ana       "@/data/scripts/class_extensions/ana.class"
+define command wout      "@/data/scripts/class_extensions/wout.class"
 define command gbt2class "@/data/scripts/class_extensions/convert.class"
-define command error "@/data/scripts/class_extensions/error.class" "/data/scripts/class_extensions/error.hlp"
-define command alan "@/data/scripts/class_extensions/alan.class"
+define command error     "@/data/scripts/class_extensions/error.class" "/data/scripts/class_extensions/error.hlp"
+define command alan      "@/data/scripts/class_extensions/alan.class"
 define command luminosity "@/data/scripts/class_extensions/luminosity.class" "/data/scripts/class_extensions/luminosity.hlp"
-define command sin "@/data/scripts/class_sin_fit/find-best-sinus-plot.class"
-define command hanning "@/data/scripts/class_extensions/hanning.class" "/data/scripts/class_extensions/hanning.hlp"
-
-
-
-
-
-
-
-
-
-
-
-
-
+define command sin       "@/data/scripts/class_sin_fit/find-best-sinus-plot.class"
+define command hanning   "@/data/scripts/class_extensions/hanning.class" "/data/scripts/class_extensions/hanning.hlp"
 
