@@ -1,6 +1,5 @@
-
 !!!!!!! update drop "K" Aug.1. 2012 by Zhiyu Zhang 
-!!!!    update velocity resolution 2016  
+!!!!    update the input to be the closest velocity resolution 2016  
 !!!!!!! If you have any comment or question, please contact with pmozhang@gmail.com
 
 define inte times 
