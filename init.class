@@ -25,6 +25,6 @@ define command gbt2class "@/data/scripts/class_extensions/convert.class"
 define command error     "@/data/scripts/class_extensions/error.class" "/data/scripts/class_extensions/error.hlp"
 define command alan      "@/data/scripts/class_extensions/alan.class"
 define command luminosity "@/data/scripts/class_extensions/luminosity.class" "/data/scripts/class_extensions/luminosity.hlp"
-define command sin       "@/data/scripts/class_sin_fit/find-best-sinus-plot.class"
 define command hanning   "@/data/scripts/class_extensions/hanning.class" "/data/scripts/class_extensions/hanning.hlp"
+!define command sin       "@/data/scripts/class_sin_fit/find-best-sinus-plot.class"
 
