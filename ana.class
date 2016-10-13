@@ -5,13 +5,14 @@
 ! @ ana  
 ! 
 
-define real count[found] bchan[found] maxsig tsy[found]
+define real count[found] bchan[found] maxsig tsy[found] rrms[found]
 for i 1 to found
 get idx%num[i]
 bas
 let count[i] sigma
 let bchan[i] i
 let tsy[i] tsys
+let rrms[i] sigma/(Tsys*1.4/sqrt(abs(freq_step*1e6*time)))
 say "progress" 'i/found*100.' "% is done"  /format a15 f7.2 a10
 next
 
@@ -43,6 +44,23 @@ pen 0
 
 dra t 5 10 "Tsys curve"
 pause
+
+
+compute maxsig max rrms 
+
+set mod x 0 found
+set mod y 0 maxsig
+cl
+box n 
+axis xl
+pen 2
+points bchan rrms 
+pen 0
+
+dra t 5 10 "Rms/Rms_theatrical ratio curve"
+pause
+
+
 
 
 set mod x t
