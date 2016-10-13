@@ -61,8 +61,6 @@ dra t 5 10 "Rms/Rms_theatrical ratio curve"
 pause
 
 
-
-
 set mod x t
 set mod y t
 
