@@ -92,7 +92,7 @@ if found.GT.1 then
     for /while 1.EQ.1
         say "                                                   " 
         say " ==================================================" 
-        say " PRESS 1-9 to set quality, then press K to confirm "
+        say " Press 1-9 to set quality then press K to confirm  "
         say " n -> next; p-> previous; q-> quit; s -> smooth    "
         say " ==================================================" 
         say "                                                   " 
