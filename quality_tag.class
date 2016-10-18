@@ -1,0 +1,467 @@
+!! -- Written by Zhi-Yu Zhang : pmozhang@gmail.com
+!! --usage: @quality_tag xxxx  (without .apex)
+!! -- This version sets the input file extension to be .apex by default    
+!! 1). set two pairs of windows first
+!!    for weak lines, you can set them to be all 0 
+!! 2). tag the line qualities from 9 (lowest) to 1 (highest)
+!! 3). loop to the end of the spectral list, tag all spectra 
+!! 4). After tagging, load the file by 
+!!    file in xxxx_tagqua.apex
+!!    find            ! you can not find spectra with quality 9 
+!!    find /quality 3  ! (all spectra better/equal than 3)
+!!    find /quality 9  ! (all spectra better/equal than 9)
+
+set ext .apex
+set align v c
+clear
+define character src*12[61] lineName*4 outfilename*128 inFileName*128  comment*20 transition*5
+define integer nBase nPeak nBegin nEnd ntmp qua
+define real out[20] err[20] winmin1 winmax1 winmin2 winmax2 sigma1 sigma2  
+define character sTMP*16
+set weight equal
+set align velocity intersect
+set bad and
+set scan * *
+set telescope *
+set source *
+set range * * * *
+set offset * *
+set line *
+set num * *
+set nomatch
+set var gau wri
+set plot h
+set for l
+on error next
+
+
+!------sub-procedure showing the obs/theoretical ratio of the noise  
+begin procedure rms
+    analyse\draw text 20 14 "Rrms:             "
+    analyse\draw text 22 14 'nint(sigma/(Tsys*1.4/sqrt(abs(freq_step*1e6*time)))*100)/100'
+    analyse\draw window
+end procedure rms 
+!----------------------------------------------------
+
+
+
+
+let inFileName  &1  
+  say 'inFileName'
+  file in  'inFileName'.apex 
+  sic copy 'inFileName'.apex 'inFileName'_tagqua.apex
+  file both 'inFileName'_tagqua.apex 
+  find 
+  list
+  
+if found.GT.1 then
+ave    
+pl
+
+            
+say "setting windows, please input parameters "
+!!!pause
+!!!load
+!!!plot /index
+!!!set window /poly 1
+!!!get f
+!!!!base /pl
+say "please input 2 windows one by one in sequence  "
+say "please input window No.1"
+let winmin1 &5
+let winmax1&6
+say "please input window No.2"
+let winmin2 &7
+let winmax2 &8
+set win winmin1 winmax1   winmin2 winmax2 /no !0 1000 /no
+get f
+pl
+bas 
+base /pl
+
+
+
+
+
+
+      @rms
+	  let sigma1 'sigma'
+	  sm
+	  sm
+	  sm
+	  sm
+	  bas
+	  let sigma2 'sigma'
+	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+	  get
+
+    for /while 1.EQ.1
+	say " ==================================================" 
+	say " PRESS 1-9 to set quality, then press K to confirm "
+	say " press n -> next; p-> previous; q-> quit           "
+	say " ==================================================" 
+      !las\set box D
+      pen /col 0
+       !!!!!!!!!!!!!!!!!!!
+      greg\set box  2.1 3.9 0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 1 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!
+      greg\set box  4.1 5.9 0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 2 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!
+      greg\set box  6.1 7.9 0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 3 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!
+      greg\set box  8.1 9.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 4 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  10.1 11.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 5 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  12.1 13.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 6 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  14.1 15.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 7 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  16.1 17.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 8 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  18.1 19.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 9 /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  20.1 21.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 next /box 0
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+         !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  22.1 23.9  0 2
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1
+      g\draw tex 1 1 pre /box 0
+      !las\set box D
+	  !!!!!!!!!!!!!!!!!!!!!!!
+	  greg\set box  24.1 25.9  0 2
+	  g\box n n n /fill 20
+	  pen /wei 2 /col 0
+	  set char 1
+	  g\draw tex 1 1 FFT /box 0
+	  !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  20 26 15 17
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 2
+      g\draw tex 3 1 QUIT /box 0
+      set char 0.6
+      !las\set box D
+      !!!!!!!!!!!!!!!!!!!!!
+      greg\set box  10 16 15 17
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 2
+      g\draw tex 3 1 OK /box 0
+      set char 0.6
+      !las\set box D
+      pen /def
+      !!!!!!!!!!!!!!!!!!!!!!!!  
+       greg\set box  6 9  15 17
+      g\box n n n /fill 20
+      pen /wei 2 /col 0
+      set char 1.8
+      g\draw tex 1.2 1 SM /box 0
+      set char 0.6
+      !las\set box D
+      pen /def
+      greg1\draw relocate
+      !@getCursPhy     
+      !las\set box D 
+!!!!!!!!!!!!!!!!!!!!!!!!!tag quality
+if (abs(phy_curs[1]-3).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."1") then
+       tag 1
+       let qua 1
+      set box d
+      pl
+       base /pl
+       set char 4
+       g\draw tex 1.5 11.5 "1"   
+       set char 0.6
+       exam quality
+       @rms
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-5).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."2") then
+       tag 2
+       let qua 2
+       exam quality
+      set box d
+       pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "2"   
+       set char 0.6
+      @rms
+      endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-7).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."3") then
+       tag 3
+	let qua 3
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "3"   
+       set char 0.6
+@rms
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-9).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."4") then
+       tag 4
+	let qua 4
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "4"   
+       set char 0.6
+ 
+@rms
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-11).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."5") then
+       tag 5
+	let qua 5
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "5"   
+       set char 0.6
+@rms
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-13).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."6") then
+       tag 6
+	let qua 6
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "6"   
+       set char 0.6
+@rms
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-15).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."7") then
+       tag 7
+	let qua 7
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "7"   
+       set char 0.6
+@rms
+endif
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-17).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."8") then
+       tag 8
+       let qua 8
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "8"   
+       set char 0.6
+@rms
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-19).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."9") then
+       tag 9
+	let qua 9
+       exam quality
+      set box d
+      pl
+       base /pl	
+       set char 4
+       g\draw tex 1.5 11.5 "9"   
+       set char 0.6
+@rms
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!get n
+if (abs(phy_curs[1]-21).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."N") then
+       get n
+       
+	  set box d
+       base
+       pl
+       base /pl	
+      @rms
+      bas
+	   let sigma1 'sigma'
+	   sm
+	   sm
+	   sm
+	   sm
+	   bas
+	   let sigma2 'sigma'
+	   analyse\draw text 20 13 "Alan "
+	   analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+	   get
+       
+
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!get p
+if (abs(phy_curs[1]-23).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."P") then
+       get  p
+	  
+	  	  
+	  set box d
+        base
+        pl
+       	base /pl
+	  @rms
+	  bas
+	  let sigma1 'sigma'
+	  sm
+	  sm
+	  sm
+	  sm
+	  bas
+	  let sigma2 'sigma'
+	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+	  get
+      
+
+endif
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FFT
+if abs(phy_curs[1]-25).LT.1.AND.abs(phy_curs[2]-1).LT.1 then
+	   ! get
+		set box d
+		base
+		!pl
+		fft 
+		analyse\draw text 20 13 "Alan "
+		analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+		dra
+		pause
+
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-13).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."K") then
+        get 
+		tag qua
+        write 
+      	get next
+	   	set box d
+       	base
+       	pl
+       	base /pl
+  	 @rms
+	  bas
+	  let sigma1 'sigma'
+	  sm
+	  sm
+	  sm
+	  sm
+	  bas
+	  let sigma2 'sigma'
+	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+	  get
+     
+
+	  
+endif
+      
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+if (abs(phy_curs[1]-23).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."Q") then
+       break
+      base
+      set box d
+      pl
+      base /pl
+      @rms
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!SMOOTHING
+if (abs(phy_curs[1]-7.5).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."S") then
+       sm 
+	   set box d
+        pl
+       base /pl
+		@rms
+        analyse\draw text 20 13 "Alan "
+        analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
+endif
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+next   
+set box d
+endif
+!endif
+
+ 
