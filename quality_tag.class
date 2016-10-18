@@ -1,4 +1,7 @@
 !! -- Written by Zhi-Yu Zhang : pmozhang@gmail.com
+!! Aim: qualify CLASS spectra by hand, from level 9 to level 1
+!! Allan factor is how much the spectra follows the Allan deviation when smoothing 
+!! Rrms factor is the ratio between measured noise and the theoretical noise calculated using Tsys 
 !! --usage: @quality_tag xxxx 
 !!  xxxx is the file name. e.g., test1234.apex or FTS108e.30m 
 !!  Here all spectra are from the aimed target and the aimed spectra 
@@ -12,6 +15,10 @@
 !!    find             ! you can not find spectra with quality 9 
 !!    find /quality 3  ! (all spectra better/equal than 3)
 !!    find /quality 9  ! (all spectra better/equal than 9)
+
+!!  to-do: set mod x range ? 
+!!         an automated version? 
+!!         integrate with spectral analysis tools? 
 
 set align v c
 clear
