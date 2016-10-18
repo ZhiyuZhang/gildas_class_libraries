@@ -57,6 +57,7 @@ end procedure rms
 let inFileName  &1  
 file in  'inFileName' 
 sic copy 'inFileName' 'inFileName'.tagqua
+sic wait 1
 file both 'inFileName'.tagqua
     find 
     list
