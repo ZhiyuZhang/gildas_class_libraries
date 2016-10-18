@@ -93,7 +93,7 @@ if found.GT.1 then
         say "                                                   " 
         say " ==================================================" 
         say " PRESS 1-9 to set quality, then press K to confirm "
-        say " press n -> next; p-> previous; q-> quit           "
+        say " n -> next; p-> previous; q-> quit; s -> smooth    "
         say " ==================================================" 
         say "                                                   " 
         pen /col 0
