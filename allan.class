@@ -1,4 +1,4 @@
-define double sigma1 sigma2  alan 
+define double sigma1 sigma2  allan 
 define inte loop
 let loop &1 
 bas
@@ -8,7 +8,7 @@ sm
 next 
 bas
 let sigma2 'sigma'
-let alan  'nint(sigma1/sigma2*100000)/100000/4'
-say 'alan'
-analyse\draw text 20 13 "Alan "
+let allan  'nint(sigma1/sigma2*100000)/100000/4'
+say 'allan'
+analyse\draw text 20 13 "allan "
 analyse\draw text 23 13 'nint(sigma1/sigma2*100000)/100000/4'
