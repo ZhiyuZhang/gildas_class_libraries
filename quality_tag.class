@@ -92,7 +92,7 @@ base /pl
 	  sm
 	  bas
 	  let sigma2 'sigma'
-	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 20 13 "Allan "
 	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 	  get
 
@@ -363,7 +363,7 @@ if (abs(phy_curs[1]-21).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."N"
 	   sm
 	   bas
 	   let sigma2 'sigma'
-	   analyse\draw text 20 13 "Alan "
+	   analyse\draw text 20 13 "Allan "
 	   analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 	   get
        
@@ -388,7 +388,7 @@ if (abs(phy_curs[1]-23).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.eq."P"
 	  sm
 	  bas
 	  let sigma2 'sigma'
-	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 20 13 "Allan "
 	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 	  get
       
@@ -402,7 +402,7 @@ if abs(phy_curs[1]-25).LT.1.AND.abs(phy_curs[2]-1).LT.1 then
 		base
 		!pl
 		fft 
-		analyse\draw text 20 13 "Alan "
+		analyse\draw text 20 13 "Allan "
 		analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 		dra
 		pause
@@ -430,7 +430,7 @@ if (abs(phy_curs[1]-13).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."K
 	  sm
 	  bas
 	  let sigma2 'sigma'
-	  analyse\draw text 20 13 "Alan "
+	  analyse\draw text 20 13 "Allan "
 	  analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 	  get
      
@@ -454,7 +454,7 @@ if (abs(phy_curs[1]-7.5).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."
         pl
        base /pl
 		@rms
-        analyse\draw text 20 13 "Alan "
+        analyse\draw text 20 13 "Allan "
         analyse\draw text 23 13 'nint(sigma2/sigma1*100)/100*4'
 endif
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
