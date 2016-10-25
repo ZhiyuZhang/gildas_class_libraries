@@ -48,8 +48,8 @@ pause
 
 compute maxsig max rrms 
 
-set mod x 0 found
-set mod y 0 maxsig
+set mod x 0   found
+set mod y 0.8 1.5 
 cl
 box n 
 axis xl
