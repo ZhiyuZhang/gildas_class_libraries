@@ -1,6 +1,14 @@
 !!!!!!! update drop "K" Aug.1. 2012 by Zhiyu Zhang 
-!!!!    update the input to be the closest velocity resolution 2016  
-!!!!!!! If you have any comment or question, please contact with pmozhang@gmail.com
+!!!!    update the input to be the closest velocity resolution Jun. 2016  
+!!      update example 03 Nov 2016 
+!!!!!!! If you have any comment or question, please contact to Zhiyu Zhang: pmozhang@gmail.com
+! -----------------------------------------------------------------------
+! --        Example: 
+! --        file in xxx.30m
+! --        find 
+! --        @vloop 20 ! 20 km/s resolution for the rms noise estimate 
+! --        press ? or H in the X11 window for help 
+! -----------------------------------------------------------------------
 
 define inte times 
 define double input_reso 

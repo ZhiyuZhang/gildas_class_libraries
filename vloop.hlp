@@ -1,5 +1,9 @@
 1 VLOOP 
-       VLOOP Arg1 Arg2 [Arg3]
+       VLOOP Arg1 
+       example:
+       file in xxx.30m
+       find /source xxx /line xx /tel xxx 
+       vloop velocity_resolution_for_your_estimate  
 
        This is a detailed description of MYCOMMAND.
 1 ENDOFHELP
