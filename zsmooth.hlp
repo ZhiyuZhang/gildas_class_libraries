@@ -1,0 +1,18 @@
+1 ZD 
+       zsmooth Arg1 
+       The aim of this script is to smooth to user-defined resolution using resample. 
+
+       USAGE:
+  
+       zsmooth velo_res 
+       
+       example:
+ 
+       zd 50 
+
+       This is a detailed description of ZSMOOTH.
+1 ENDOFHELP
+
+
+
+

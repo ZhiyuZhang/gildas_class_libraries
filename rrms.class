@@ -1,7 +1,10 @@
-analyse\draw text 19 14 "rms:          K km/s"
-analyse\draw text 19 13 "area:         K km/s"
+analyse\draw text 19 14 "rms:              K km/s"
+analyse\draw text 19 13 "area:             K km/s"
 set var bas read
 
 analyse\draw text 21 13 'nint(area*100)/100'
-analyse\draw text 21 14 'nint(sigma*(w2[1]-w1[1])/sqrt(abs((w2[1]-w1[1])/velo_step))*1000)/1000'
+analyse\draw text 21 14 'nint(sigma*(w2[1]-w1[1])/sqrt(abs((w2[1]-w1[1])/velo_step))*100)/100'
 analyse\draw window
+say 'nint(area*100)/100'
+say 'nint(sigma*(w2[1]-w1[1])/sqrt(abs((w2[1]-w1[1])/velo_step))*100)/100'
+

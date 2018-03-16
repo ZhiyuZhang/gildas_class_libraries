@@ -1,12 +1,14 @@
 !! --Aim: combine spectral data of the two spectrometers in one sidband of AAEX  SHeFI
 !! --written by Zhi-Yu Zhang : pmozhang@gmail.com 
-!! -- last change: 15 Sep. 2016
-!! -- It only works for SEPIA band-9 with names of 
-!!  AP-N601-XF01 AP-N602-XF02  AP-N602-XF03 AP-N602-XF03
-!!  601 and 602 are two different polarisations, and (F01,F02), (F03,F04) are two IF pairs 
-!! -- usage: @ combine_twoIFs.class  inputfile.apex sourcename time_to_smooth 
-!! -- example: @ combine_twoIFs.class E-097.F-9808A-2016-2016-08-18.apex  NA.V1.186  10 
+! -- last change: 16 Mar 2018 
+! now it supports more inputs with names of spectrometers  
+!! -- usage:   
+! @ combine_twoIFs.class  inputfile.apex    sourcename  time_to_smooth spec1 spec2 spec3 spec4
+! example: 
+! @ combine_twoIFs.class   abcd.apex        NA.V1.186   10  AP-N601-XF01  AP-N601-XF02 AP-N602-XF03 AP-N602-XF04
+
 !! -- where 10 is how many times you want to smooth 
+!! -- last change: 15 Sep. 2016
 
 set     ext .apex
 set     unit v c
@@ -25,9 +27,15 @@ end procedure sm_spec
 
 
 cl
-let  infile &1
+let  infile     &1
 let  sourcename &2  
-let  sm_times  &3
+let  sm_times   &3
+let  spec1      &4
+let  spec2      &5  
+let  spec3      &6
+let  spec4      &7
+
+
 
 
 !-------- reorder the scans for pol1 
@@ -35,8 +43,8 @@ file   in  'infile'
 find
 sic  dele 'sourcename'_reorder_pol1.apex
 file out  'sourcename'_reorder_pol1.apex m
-find   /sour 'sourcename'   /tel AP-N601-XF01 
-find a /sour 'sourcename'   /tel AP-N601-XF02 
+find   /sour 'sourcename'   /tel spec1 
+find a /sour 'sourcename'   /tel spec2 
 copy 
 
 !--------- subtract baseline for each IF 
@@ -67,8 +75,8 @@ file   in  'infile'
 find
 sic  dele 'sourcename'_reorder_pol2.apex
 file out  'sourcename'_reorder_pol2.apex m
-find   /sour 'sourcename'   /tel AP-N602-XF03 
-find a /sour 'sourcename'   /tel AP-N602-XF04 
+find   /sour 'sourcename'   /tel spec3 
+find a /sour 'sourcename'   /tel spec4 
 copy 
 
 !--------- subtract baseline for each IF 

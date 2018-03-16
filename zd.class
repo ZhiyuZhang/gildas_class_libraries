@@ -1,0 +1,305 @@
+! ------- ZD -- identify redshift from spectral lines 
+! usage: zd redshift velocity_resolution(in km/s) level(from 1 to 2)
+! example: zd 2.87 120 1 
+
+
+define double redshift  /g
+define double maxy  miny
+define double input_reso
+define double N I0 V0 Dv N_out I0_out V0_out Dv_out 
+define int level 
+
+
+cl 
+let     redshift   &1 
+let     input_reso &2
+let     level      &3
+pen     0          /wei 0.5 
+set     mod        y t 
+set     char       0.6
+multiply 1000
+
+compute   maxy   max   ry
+compute   miny   min   ry
+set       mod    y     maxy*-1.1   maxy*1.6
+
+!--------- resample to our desired velocity resolution -------
+let N channels
+let I0 reference
+let V0 velocity
+let Dv velo_step
+let N_out nint(N/abs(input_reso/Dv))
+let I0_out (I0/N)*N_out
+let v0_out v0
+let Dv_out input_reso*DV/abs(DV)
+resample  N_out I0_out  v0_out Dv_out velocity
+!-----------------------------------------------------------
+
+box
+spec 
+histo rx ry /fill 5 /bas
+histo rx ry 
+set char 0.4 
+
+
+!!!!!!!!!!!!!!!!!!!!sub-procedures!!!!!!!!!!!!!!!!!!!!!
+begin procedure strongest 
+!define real redshift 
+let redshift &1 
+pen 1 /wei 1
+
+say "redshift:"
+say 'redshift'
+
+draw upper      115271.2018/(1+redshift)    CO10
+draw upper      230538.0000/(1+redshift)    CO21
+draw upper      345795.9899/(1+redshift)    CO32
+draw upper      461040.7682/(1+redshift)    CO43
+draw upper      576267.9305/(1+redshift)    CO54
+draw upper      691473.0763/(1+redshift)    CO65
+draw upper      806651.8060/(1+redshift)    CO76
+draw upper      921799.7000/(1+redshift)    CO87
+draw upper     1036912.3930/(1+redshift)    CO98
+draw upper     1151985.4520/(1+redshift)    CO10-9
+draw upper     1267014.4860/(1+redshift)    CO11-10
+draw upper     1381995.1050/(1+redshift)    CO12-11
+draw upper     1496922.9090/(1+redshift)    CO1312
+draw upper     1611793.5180/(1+redshift)    CO1413
+draw upper     1726602.5066/(1+redshift)    CO1514
+draw upper     1841345.5060/(1+redshift)    CO1615
+draw upper     1956018.1390/(1+redshift)    CO1716
+draw upper     2070615.9930/(1+redshift)    CO1817
+draw upper     2185134.6800/(1+redshift)    CO1918
+draw upper     2299569.8420/(1+redshift)    CO2019
+draw upper     2413917.1130/(1+redshift)    CO2120
+draw upper     2528172.0600/(1+redshift)    CO2221
+draw upper     2642330.3464/(1+redshift)    CO2322
+draw upper     2756387.5840/(1+redshift)    CO2423
+draw upper     2870339.4070/(1+redshift)    CO2524
+draw upper     2984181.4550/(1+redshift)    CO2625
+pen 0 /wei 1
+
+!------------- atomic lines  ---------------------
+pen 1 /wei 1
+draw upper        492160.7/(1+redshift)    CI10
+draw upper        809343.5/(1+redshift)    CI21
+draw upper      1461131.41/(1+redshift)    NII205 
+draw upper      1900536.90/(1+redshift)    CII158
+draw upper      2459374.00/(1+redshift)    NII112 
+draw upper      2060068.00/(1+redshift)    OI145 
+draw upper      4744777.50/(1+redshift)    OI63 
+pen 0 /wei 1
+!-------------------------------------------------
+
+
+! from Spilker 2014 ApJ 
+
+!--------- H2O lines -----------------------
+!draw upper     380197.4/(1+redshift)    H2O4-3   --- weak 
+!draw upper     448001.1/(1+redshift)    H2O4-3    --- weak   
+!draw upper     556936.0/(1+redshift)    H2O1-1 
+!draw upper    752033.1/(1+redshift)    H2O2-2 
+
+draw upper     752033.2/(1+redshift)    H2O211-202
+draw upper     437150.8/(1+redshift)    H2O753-660       
+draw upper     439150.8/(1+redshift)    H2O643-550       
+
+
+draw upper     987926.8/(1+redshift)    H2O202-111
+draw upper    1097364.8/(1+redshift)    H2O312-303
+draw upper    1113343.0/(1+redshift)    H2O111-000 
+draw upper    1153126.8/(1+redshift)    H2O312-221
+draw upper    1162911.6/(1+redshift)    H2O321-312
+draw upper    1207638.7/(1+redshift)    H2O422-413
+draw upper    1228788.8/(1+redshift)    H2O220-211
+draw upper    1410618.1/(1+redshift)    H2O523-514
+
+
+!draw upper 556936.1/(1+redshift)       H2O1_1_0-1_0_1 
+draw upper 380197.4/(1+redshift)       H2O4_1_4-3_2_1 
+draw upper 448001.2/(1+redshift)       H2O4_2_3-3_3_0 
+draw upper 620701.2/(1+redshift)       H2O5_3_2-4_4_1 
+draw upper 439150.9/(1+redshift)       H2O6_4_3-5_5_0 
+draw upper 443018.4/(1+redshift)       H2O7_5_2-6_6_1 
+draw upper 321225.7/(1+redshift)       H2O10_2_9-9_3_6
+
+
+draw upper 987926.7/(1+redshift)    H2O2_0_2-1_1_1	
+draw upper 752033.2/(1+redshift)    H2O2_1_1-2_0_2	
+draw upper 183310.0/(1+redshift)    H2O3_1_3-2_2_0	
+draw upper 916171.6/(1+redshift)    H2O4_2_2-3_3_1	
+draw upper 325153.0/(1+redshift)    H2O5_1_5-4_2_2	
+draw upper 970315.2/(1+redshift)    H2O5_2_4-4_3_1	
+!draw upper 474689.3/(1+redshift)    H2O5_3_3-4_4_0	
+draw upper 470889.1/(1+redshift)    H2O6_4_2-5_5_1	
+draw upper 488491.1/(1+redshift)    H2O6_2_4-7_1_7	
+draw upper 437346.7/(1+redshift)    H2O7_5_3-6_6_0	
+draw upper 906206.1/(1+redshift)    H2O9_2_8-8_3_5	
+
+
+draw upper 532723.9/(1+redshift)        CH532
+end procedure strongest
+
+
+begin procedure absorption 
+define double redshift 
+let redshift &1 
+
+
+!-------- absorption lines ----------
+pen 6 /wei 1
+draw upper    556936.0/(1+redshift)    H2O110-101 
+draw upper    474689.1/(1+redshift)    H2O533-440
+pen 0 /wei 0.5
+end procedure absorption  
+
+begin procedure masers 
+define double redshift 
+let redshift &1 
+
+
+! -----------masers --------------
+pen 3 /wei 1
+draw upper     325152.9/(1+redshift)    H2O515-422
+pen 0 /wei 0.5
+end procedure masers 
+
+
+begin procedure densegas 
+define double redshift 
+let redshift &1 
+
+
+draw upper 113168.7/(1+redshift)  CN1_0.5-0_0.5	
+draw upper 113494.9/(1+redshift)  CN1_1.5-0_0.5	
+draw upper 226332.7/(1+redshift)  CN2_1.5-1_1.5	
+draw upper 226659.0/(1+redshift)  CN2_1.5-1_0.5	
+draw upper 226876.5/(1+redshift)  CN2_2.5-1_1.5	
+draw upper 339487.6/(1+redshift)  CN3_2.5-2_2.5	
+draw upper 340031.3/(1+redshift)  CN3_2.5-2_1.5	
+draw upper 340248.8/(1+redshift)  CN3_3.5-2_2.5	
+draw upper 452628.6/(1+redshift)  CN4_3.5-3_3.5	
+draw upper 453389.8/(1+redshift)  CN4_3.5-3_2.5	
+draw upper 453607.3/(1+redshift)  CN4_4.5-3_3.5	
+draw upper 565751.1/(1+redshift)  CN5_4.5-4_4.5	
+draw upper 566729.8/(1+redshift)  CN5_4.5-4_3.5	
+draw upper 566947.3/(1+redshift)  CN5_5.5-4_4.5	
+draw upper 678850.6/(1+redshift)  CN6_5.5-5_5.5	
+draw upper 680046.8/(1+redshift)  CN6_5.5-5_4.5	
+draw upper 680264.3/(1+redshift)  CN6_6.5-5_5.5	
+draw upper 791922.4/(1+redshift)  CN7_6.5-6_6.5	
+draw upper 793336.1/(1+redshift)  CN7_6.5-6_5.5	
+draw upper 793553.6/(1+redshift)  CN7_7.5-6_6.5	
+
+draw upper  93172.0/(1+redshift)        N2H+2-1
+draw upper 186344.8/(1+redshift)        N2H+2-1
+draw upper 279511.7/(1+redshift)        N2H+3-2
+draw upper 372672.5/(1+redshift)        N2H+4-3
+draw upper 465825.0/(1+redshift)        N2H+5-4
+draw upper 558966.7/(1+redshift)        N2H+6-5
+
+
+
+draw upper 262004.2/(1+redshift)        C2H3-2
+draw upper 349338.7/(1+redshift)        C2H4-3
+draw upper 436660.4/(1+redshift)        C2H5-4
+draw upper 523970.4/(1+redshift)        C2H6-5
+
+
+
+draw upper  97981.0/(1+redshift)	     CS2-1	
+draw upper 146969.0/(1+redshift)	     CS3-2	
+draw upper 195954.2/(1+redshift)	     CS4-3	
+draw upper 244935.6/(1+redshift)	     CS5-4	
+draw upper 293912.1/(1+redshift)	     CS6-5	
+draw upper 342882.9/(1+redshift)	     CS7-6	
+draw upper 391846.9/(1+redshift)	     CS8-7	
+draw upper 440803.2/(1+redshift)	     CS9-8	
+draw upper 489750.9/(1+redshift)	     CS10-9	
+
+
+draw upper  90663.6/(1+redshift)  HNC1-0	
+draw upper 181324.8/(1+redshift)  HNC2-1	
+draw upper 271981.1/(1+redshift)  HNC3-2	
+draw upper 362630.3/(1+redshift)  HNC4-3	
+draw upper 453269.9/(1+redshift)  HNC5-4	
+draw upper 543897.6/(1+redshift)  HNC6-5	
+draw upper 634510.8/(1+redshift)  HNC7-6	
+draw upper 725107.3/(1+redshift)  HNC8-7	
+draw upper 815684.7/(1+redshift)  HNC9-8	
+
+
+draw upper   89188.5/(1+redshift)     HCO+1-0	
+draw upper  178375.1/(1+redshift)     HCO+2-1	
+draw upper  267557.6/(1+redshift)     HCO+3-2	
+draw upper  356734.3/(1+redshift)     HCO+4-3	
+draw upper  445903.0/(1+redshift)     HCO+5-4	
+draw upper  535061.8/(1+redshift)     HCO+6-5	
+draw upper  624208.7/(1+redshift)     HCO+7-6	
+draw upper  713342.1/(1+redshift)     HCO+8-7	
+draw upper  802458.3/(1+redshift)     HCO+9-8	
+
+
+
+draw upper  88631.8/(1+redshift)  HCN1--0	
+draw upper 177261.1/(1+redshift)  HCN2--1	
+draw upper 265886.4/(1+redshift)  HCN3--2	
+draw upper 354505.5/(1+redshift)  HCN4--3	
+draw upper 443116.1/(1+redshift)  HCN5--4	
+draw upper 531716.3/(1+redshift)  HCN6--5	
+draw upper 620304.0/(1+redshift)  HCN7--6	
+draw upper 708877.0/(1+redshift)  HCN8--7	
+draw upper 797433.3/(1+redshift)  HCN9--8	
+
+draw upper 801571.888/(1+redshift)  H2CO11(4,7)-10(4,6)
+draw upper      500034.402/(1+redshift)   HC3N55-54 
+draw upper      500431.536/(1+redshift)   SO218(9,9)-19(8,12)	
+draw upper      552003.51/(1+redshift)    H2CO523-606 
+
+
+end procedure densegas 
+
+
+
+    @   strongest    redshift
+    @   absorption   redshift
+
+if level.eq.2 then
+    @   masers       'redshift'
+    @   densegas     'redshift'
+endif 
+
+
+
+draw t 22 1  "z = "'redshift' 
+draw t 19 1  'source' 
+draw t 24 1  "@ "'nint(velo_step)'" km/s"
+
+
+pen 1 /wei 1 
+g\draw relo 0.5   -1 
+g\draw line 1.5   -1 
+g\draw t    1.5 -1 "strong"
+pen 6 /wei 1 
+g\draw relo 0.5   -0.3 
+g\draw line 1.5   -0.3 
+g\draw t    1.5   -0.3 "absor-lines"
+pen 3 /wei 1 
+g\draw relo 3.5   -1 
+g\draw line 4.5   -1 
+g\draw t    4.5   -1 "masers"
+pen 0 /wei 1 
+g\draw relo 3.5   -0.3 
+g\draw line 4.5   -0.3 
+g\draw t    4.5   -0.3 "dense gas"
+
+
+sic dele test.eps
+sic dele output_'source'_z'redshift'.eps 
+hard     output_'source'_z'redshift'.eps  
+sic copy output_'source'_z'redshift'.eps  test.eps 
+!$ open test.eps
+
+multiply 0.001 
+set mod y t
+del /var redshift
