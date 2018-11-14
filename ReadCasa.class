@@ -1,0 +1,34 @@
+! read_alma.class for converting spectral file in ascii format exported from CASA viewer  
+! the input file format should be freq in GHz and flux in Jy (or in Jy/beam)
+! #freq(GHz),flux(Jy)
+! 79.98991668083,0.0009923597424891897 
+! xxx           , xxx 
+! written by Zhiyu Zhang pmozhang@gmail.com 
+
+define char InputFile*100 OutputFile*100 SourceName*100
+let         InputFile  &1 
+let        OutputFile  &2 
+let         SourceName &2
+
+
+sic dele 'OutputFile'
+file out 'OutputFile' s 
+
+set var SPECTRO write  
+col x 1 y 2 /file 'InputFile'  /comment "#" 
+
+let x x*1e3      ! from GHz to MHz
+
+model y /XAXIS 1 x[1] x[2]-x[1] freq
+! -----   x[1] is the frequency of the first channel  
+! -----   x[2]-x[1]  is the channel width 
+
+modify source SourceName 
+pl
+write 1
+next 
+
+
+
+
+

@@ -1,0 +1,123 @@
+! 1. To calculate noise channel by channel 
+! 2. To calculate the rms of an area  (velocity integrated Tb/flux) 
+! 3. To calculate the noise in a velocity range (average Tb/flux). 
+
+! -- pre-request: 
+! -- All spectra should be aligned and the loaded index should be consistent.
+!  
+! written by Zhiyu Zhang
+! pmozhang@gmail.com
+! 22 Oct. 2018 
+! TODO: implement other output, e.g., Mean, Median, Max, Min, etc  
+! TODO: resample data into the same frame 
+! TODO: multiple baseline windows  
+! TODO:  
+
+
+cl
+set unit v
+
+set box default
+ave ! get f 
+pl
+set win
+bas 
+
+! ---  define several different output
+
+define double ry_copy chan_noise chan_mean chan_median  /like ry 
+define double chan1 chan2 chans[2] 
+define double rmssq[40] ry_copy_sum[40] noisewinsum AreaNoise[40] AreaFlux[40] winchans[40] 
+define inte   intchan1 intchan2 
+
+
+! --- load index 
+load
+! --- get the rg% variable 
+base /index
+pl /index
+
+set var bas read
+cl
+
+! ---- channel by channel calculation 
+! ---- now we only use rms for the noise calculation 
+for i 1 to channels
+compute chan_mean[i]   mean   rg[i,]
+compute chan_noise[i]  rms    rg[i,]
+compute chan_median[i] median rg[i,]
+next 
+
+! --- plot the average spectrum in the upper panel ---  
+g\set box 3 25 10 20
+ave
+base
+spec 
+box n n 
+axis YL
+!  ---------------------------------------------------
+
+! --- plot the noise spectrum in the lower panel   ---
+g\set box 3 25 3 10
+let ry_copy ry
+let ry chan_noise/sqrt(found)
+spec
+draw win 
+box 
+!  ---------------------------------------------------
+
+
+
+for i 1 to 40
+    if w1[i].ne.0.and.w2[i].ne.0 then 
+        set var bas read
+        let chans (w1[i]-velocity)/velo_step+reference  (w2[i]-velocity)/velo_step+reference
+        
+!     --- find out min max of the selected window region
+
+        compute chan1 max chans
+        compute chan2 min chans
+        
+!     --- calculate how many channels that the window region takes 
+
+
+        let winchans[i] abs(nint((w1[i]-w2[i])/velo_step))
+
+!     --- get the channel numbers of min and max 
+       
+        let intchan1 nint(chan1) 
+        let intchan2 nint(chan2) 
+        define double noisewin ry_copy_win /like chan_noise[intchan2:intchan1]
+        let noisewin                                     ry[intchan2:intchan1]
+        let ry_copy_win                             ry_copy[intchan2:intchan1]
+        
+!     --- calculate the root mean square  
+        let       noisewin       noisewin*noisewin
+        compute   noisewinsum    sum  noisewin
+!       -- for each window (i), calculate sum for channels within it.  
+        let       rmssq[i]      sqrt(noisewinsum/winchans[i])
+        
+! error propagation: https://math.stackexchange.com/questions/123276/error-propagation-on-weighted-mean 
+        let AreaNoise[i] abs(w1[i]-w2[i])*rmssq[i]/sqrt(winchans[i])
+
+        compute          ry_copy_sum[i] sum ry_copy_win
+        let AreaFlux[i]  abs(w1[i]-w2[i])*ry_copy_sum[i]/winchans[i]
+        
+!pause
+        dele /var noisewin RY_COPY_WIN
+
+    else
+    endif 
+next
+
+for i 1 to 40
+    if rmssq[i].ne.0 then 
+        say "-----------------------------------------" 
+        say "window" 'i' 
+        say "RMS per channel"             'rmssq[i]'
+        say "Integrated flux:"         'AreaFlux[i]' 
+        say "Integrated flux error:"  'areanoise[i]'
+        say "-----------------------------------------" 
+     endif 
+next
+

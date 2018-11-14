@@ -1,0 +1,16 @@
+1 READCASA 
+       READCASA in_file_name out_file_name out_source_name 
+       The aim of this script is to convert the ascii file exported from CASA viewer into class format.  
+
+       by Zhiyu Zhang  (pmozhang@gmail.com)  
+       last update: 27 Apr. 2017 
+
+       USAGE:
+       readcasa input.dat output.pdbi UR94482
+       file in output.pdbi 
+       find 
+       get f
+       pl
+
+       This is a detailed description of READCASA.
+1 ENDOFHELP

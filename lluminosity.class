@@ -6,6 +6,5 @@ let ldistance &2
 let freq &3 
 let w &4
 let jyk &5 
-let lum 1.04*1e-3*w*jyk*freq/(1+redshift)*ldistance^2 
-
-say 'lum'  "Lsun" 
+let lum 3.25*1e7*(freq/(1+redshift))^(-2)*ldistance^2*(1+redshift)^(-3)*w*jyk
+say 'lum'  "K km/s pc^2" 

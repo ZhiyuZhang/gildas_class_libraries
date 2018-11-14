@@ -1,0 +1,21 @@
+1 ZD 
+       ZD Arg1 
+       The aim of this script is to identify redshift with the strongest
+       molecular lines in a spectrum. It can also handle the strong lines in
+       the image frequency in red color.  But NOTE that you need to keep the
+       original header information of the image frequency.
+
+       USAGE:
+  
+       zd redshift velo_reso 
+       
+       example:
+ 
+       zd 0.0012 120 
+
+       This is a detailed description of ZD.
+1 ENDOFHELP
+
+
+
+

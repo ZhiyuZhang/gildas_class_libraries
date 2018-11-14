@@ -1,0 +1,21 @@
+! usage: zsmooth  velocity_resolution(in km/s) 
+! example: zd  50 
+
+
+define double input_reso
+define double N I0 V0 Dv N_out I0_out V0_out Dv_out 
+
+let     input_reso &1
+
+!--------- resample to our desired velocity resolution -------
+let N channels
+let I0 reference
+let V0 velocity
+let Dv velo_step
+let N_out nint(N/abs(input_reso/Dv))
+let I0_out (I0/N)*N_out
+let v0_out v0
+let Dv_out input_reso*DV/abs(DV)
+resample  N_out I0_out  v0_out Dv_out velocity
+!-----------------------------------------------------------
+
