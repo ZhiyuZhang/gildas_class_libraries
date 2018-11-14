@@ -155,17 +155,22 @@ draw mole  140800./(1+z)     H2CO
 
 draw mole (frequency+(image-115271.202/(1+z))) CO10
 
+! --- image frequencies 
 if (velo_step*FREQ_STEP).lt.0 then
+pen 1 /wei 1
 draw mole (frequency+(image-115271.202/(1+z))) CO10
 draw mole (frequency+(image-110201.354/(1+z))) 13CO10
 draw mole (frequency+(image-109.782176/(1+z))) C18O10
 draw mole (frequency+(image-2*115271.202/(1+z))) CO21
 draw mole (frequency+(image-2*110201.354/(1+z))) 13CO21
 draw mole (frequency+(image-219.560358/(1+z))) C18O21
+pen /def 
 
 else
+pen 1 /wei 1 
 draw mole (frequency-(image-115271.202/(1+z))) CO10
 draw mole (frequency-(image-110201.354/(1+z))) 13CO10
 draw mole (frequency-(image-2*115271.202/(1+z))) CO21
 draw mole (frequency-(image-2*110201.354/(1+z))) 13CO21
+pen /def
 end if
