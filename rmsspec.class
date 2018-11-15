@@ -2,25 +2,46 @@
 ! 2. To calculate the rms of an area  (velocity integrated Tb/flux) 
 ! 3. To calculate the noise in a velocity range (average Tb/flux). 
 
+! Done: Consistent check by comparing with base 
+! Done: Consider splitting sub-channel when doing integration 
+! Done: Pre-existing window setting does not promote setting window now
+! Done: Multiple baseline windows  
+! 
+! TODO: implement other output, e.g., Mean, Median, Max, Min, etc  
+! TODO: resample data into the same frame 
+! TODO: 
+
+
 ! -- pre-request: 
 ! -- All spectra should be aligned and the loaded index should be consistent.
 !  
 ! written by Zhiyu Zhang
 ! pmozhang@gmail.com
-! 22 Oct. 2018 
-! TODO: implement other output, e.g., Mean, Median, Max, Min, etc  
-! TODO: resample data into the same frame 
-! TODO: multiple baseline windows  
-! TODO:  
+! last update 15 Nov. 2018 
+
 
 
 cl
 set unit v
 
 set box default
-ave ! get f 
+ave 
 pl
-set win
+
+if  exist(W1) then 
+   if W1[1].ne.0 then 
+   say "window defined" 
+   else
+   say "window not defined"
+   set win
+   endif
+else 
+   say "window not defined"
+   set win
+endif
+
+
+
 bas 
 
 ! ---  define several different output
@@ -32,7 +53,7 @@ define inte   intchan1 intchan2
 
 
 ! --- load index 
-load
+load !/nocheck
 ! --- get the rg% variable 
 base /index
 pl /index
@@ -81,7 +102,7 @@ for i 1 to 40
 !     --- calculate how many channels that the window region takes 
 
 
-        let winchans[i] abs(nint((w1[i]-w2[i])/velo_step))
+        let winchans[i] abs((w1[i]-w2[i])/velo_step)
 
 !     --- get the channel numbers of min and max 
        
@@ -101,9 +122,9 @@ for i 1 to 40
         let AreaNoise[i] abs(w1[i]-w2[i])*rmssq[i]/sqrt(winchans[i])
 
         compute          ry_copy_sum[i] sum ry_copy_win
+        let              ry_copy_sum[i]     ry_copy_sum[i]+(intchan1-chan1)*velo_step+(intchan2-chan2)*velo_step
         let AreaFlux[i]  abs(w1[i]-w2[i])*ry_copy_sum[i]/winchans[i]
         
-!pause
         dele /var noisewin RY_COPY_WIN
 
     else
