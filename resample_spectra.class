@@ -1,0 +1,33 @@
+! 1. To resample a list of spectra using the first spectrum as the template 
+! 2. To resample a list of spectra with user-defined parameters 
+
+! Done: First preliminary prototype code 
+!
+! TODO: 
+
+! -- pre-request:
+! -- All spectra should be found 
+!
+! written by Zhiyu Zhang
+! pmozhang@gmail.com
+! last update 15 Nov. 2018
+
+
+
+define double N I0 V0 Dv N_out I0_out V0_out Dv_out
+sic dele resampled.jcmt
+file out resampled.jcmt m  
+    get f 
+    let N channels
+    let I0 reference
+    let V0 velocity
+    let Dv velo_step
+
+for i 1 to found
+    get idx%num[i] 
+    resample  N I0 v0 Dv velocity
+    write i
+next
+
+file in resampled.jcmt
+find
