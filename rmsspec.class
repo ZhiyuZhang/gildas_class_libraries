@@ -124,14 +124,15 @@ for i 1 to 40
         let AreaNoise[i] abs(w1[i]-w2[i])*rmssq[i]/sqrt(winchans[i])
 
         compute          ry_copy_sum[i] sum ry_copy_win
-        say "---"
-        say "window, 1 2: "   'intchan1' 'intchan2'
-        say "sum ry_copy_sum: " 'ry_copy_sum[i]'
-        say "---"
+
+!       say "---"
+!       say "window, 1 2: "   'intchan1' 'intchan2'
+!       say "sum ry_copy_sum: " 'ry_copy_sum[i]'
+!       say "---"
         let              ry_copy_sum[i]     (ry_copy_sum[i]+(intchan1-chan1)*ry_copy[chan1]+(intchan2-chan2)*ry_copy[chan2])
 
-       say 'intchan1-chan1'
-       say 'intchan2-chan2'
+!      say 'intchan1-chan1'
+!      say 'intchan2-chan2'
         let AreaFlux[i]  abs(w1[i]-w2[i])*ry_copy_sum[i]/winchans[i]
         
         dele /var noisewin RY_COPY_WIN
@@ -147,9 +148,9 @@ for i 1 to 40
         say "RMS per channel"             'rmssq[i]'
         say "Integrated flux:"         'AreaFlux[i]' 
         say "Integrated flux error:"  'areanoise[i]'
-        say "channels within window:"  'winchans[i]'
-        say "velocity within window:"  'abs(w1[i]-w2[i])'
-        say "sum of all chans in window"  'ry_copy_sum[i]'
+!       say "channels within window:"  'winchans[i]'
+!       say "velocity within window:"  'abs(w1[i]-w2[i])'
+!       say "sum of all chans in window"  'ry_copy_sum[i]'
         say "-----------------------------------------" 
      endif 
 next
