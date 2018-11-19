@@ -3,7 +3,7 @@
 
 ! Done: First preliminary prototype code 
 !
-! TODO: 
+! TODO: user defined output  
 
 ! -- pre-request:
 ! -- All spectra should be found 
@@ -12,16 +12,29 @@
 ! pmozhang@gmail.com
 ! last update 15 Nov. 2018
 
-
-
+define char*50 resample_logic 
 define double N I0 V0 Dv N_out I0_out V0_out Dv_out
 sic dele resampled.jcmt
 file out resampled.jcmt m  
+
+
+say "USE the first spectrum in the list as the template? "
+let resample_logic &1
+if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES").or.(resample_logic.eq."yes") then
+
     get f 
     let N channels
     let I0 reference
     let V0 velocity
     let Dv velo_step
+else 
+Say "Please input your own configurations (in velocity)"
+    let N  &2
+    let I0 &3
+    let V0 &4
+    let Dv &5
+endif
+
 
 for i 1 to found
     get idx%num[i] 
