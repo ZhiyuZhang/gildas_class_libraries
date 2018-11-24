@@ -78,6 +78,8 @@ base 1 /pl
 !draw win
 box n n 
 axis YL
+greg averaged_spectrum /format 
+
 !  ---------------------------------------------------
 
 ! --- plot the noise spectrum in the lower panel   ---
@@ -87,6 +89,8 @@ let ry chan_noise/sqrt(found)
 spec
 draw win 
 box 
+greg noise_spectrum /format 
+
 !  ---------------------------------------------------
 
 

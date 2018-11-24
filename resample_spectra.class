@@ -1,7 +1,8 @@
 ! 1. To resample a list of spectra using the first spectrum as the template 
 ! 2. To resample a list of spectra with user-defined parameters 
-
 ! Done: First preliminary prototype code 
+! USAGE: rsp yes 
+!        rsp no 100 50 0 2.5
 !
 ! TODO: user defined output  
 

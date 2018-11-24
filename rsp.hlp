@@ -1,0 +1,18 @@
+1 RSP 
+       RSP Yes 
+       
+       RSP no 100 50 0 2.5
+       resample using the first spectrum in the current list as template? 
+       If yes, then use the first as template 
+       If no or any others, input user's own parameters for resample 
+
+       by Zhiyu Zhang  (pmozhang@gmail.com)  22 Nov 2018 
+
+       USAGE:
+       RSP yes 
+       or 
+       RSP no 100 50 0 2 (only now support velocity) 
+
+       This is a detailed description of RSP.
+1 ENDOFHELP
+
