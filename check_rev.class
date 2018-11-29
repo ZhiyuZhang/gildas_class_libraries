@@ -1,0 +1,35 @@
+
+define char*128 fname revname[14]
+define double x1 x2 y1 y2 
+let revname JCMTH00 JCMTH01 JCMTH02 JCMTH04 JCMTH05 JCMTH06 JCMTH07 JCMTH08 JCMTH09 JCMTH10 JCMTH12 JCMTH15 JCMTH11 JCMTH03 
+
+
+let fname &1
+file in 'fname'
+find 
+
+cl
+for i 1 to 14
+    find /tel 'revname[i]'
+    ave /re
+    sm box 6 
+    let x1 (i-int((i-0.001)/5)*5)/5-0.195-0.005 
+    let x2 (i-int((i-0.001)/5)*5)/5-0.005          
+    let y1 (i-int((i-0.001)/3)*3)/3-0.3-0.005  
+    let y2 (i-int((i-0.001)/3)*3)/3-0.005 
+    g\set view  x1 x2 y1 y2
+    box n n n 
+    g\draw t 1.5 0.3 'revname[i]'
+    spec
+next
+
+g\set view  4/5 5/5 2/3 3/3  
+g\draw t 3 5 "Average spectrum"
+g\draw t 3 4 "for"
+g\draw t 3 3 "each receiver"
+
+
+
+hard 'fname'"check".eps /over
+
+

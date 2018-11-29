@@ -1,0 +1,19 @@
+! script for quality control. 
+
+$ls *tag_base.jcmt > file.list
+define integer    nl
+define char*50    line
+compute nl lines file.list
+define char*50 jcmtfile[nl]
+accept * jcmtfile /column file.list
+
+sic dele all.jcmt
+file out  all.jcmt s
+for k 1 to nl
+   file in 'jcmtfile[k]' 
+   find
+   copy
+next
+
+sic dele file.list
+

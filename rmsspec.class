@@ -20,6 +20,7 @@
 ! last update 15 Nov. 2018 
 
 
+set var bas read
 
 cl
 set unit v
@@ -58,7 +59,6 @@ load !/nocheck
 base /index
 pl /index
 
-set var bas read
 cl
 
 ! ---- channel by channel calculation 

@@ -1,0 +1,13 @@
+
+
+sic dele sm20.jcmt
+file out sm20.jcmt s
+for i 1 to found
+    get idx%num[i]
+    sm box 10
+    sm box 2
+!   let ry ry/0.64
+    write i
+next
+file in sm20.jcmt
+find 
