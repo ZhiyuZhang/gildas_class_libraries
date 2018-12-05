@@ -29,7 +29,8 @@ set box default
 ave 
 pl
 
-if  exist(W1) then 
+!if  exist(W1) then 
+if  SET%LAS%NWIND.ge.1 then 
    if W1[1].ne.0 then 
    say "window defined" 
    else

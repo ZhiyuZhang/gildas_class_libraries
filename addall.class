@@ -1,6 +1,9 @@
 ! script for quality control. 
 
 $ls *tag_base.jcmt > file.list
+!$ls *combined.jcmt > file.list
+
+
 define integer    nl
 define char*50    line
 compute nl lines file.list

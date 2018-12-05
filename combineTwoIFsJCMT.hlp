@@ -1,0 +1,22 @@
+1 COMIFJCMT 
+       comIFJCMT file1 file2 edge_channels  
+       The aim of this script is to combine spectral line data, which are
+       obtained from two IFs but with the same receiver. Both IF data 
+       have the same sequence. The code will automatically remove the edge
+       channels which is very noisy, and merge the overlapped region. 
+
+
+       USAGE:
+  
+       comIFJCMT file1 file2 edge 
+       
+       example:
+ 
+       comIFJCMT a20160424_00013_01_0001.jcmt a20160424_00013_02_0001.jcmt 50 
+
+       This is a detailed description of comIFJCMT.
+1 ENDOFHELP
+
+
+
+

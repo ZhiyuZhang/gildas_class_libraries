@@ -1,0 +1,98 @@
+!! --Aim: combine spectral data of the two spectrometers in one sideband of JCMT 
+!! --written by Zhi-Yu Zhang : pmozhang@gmail.com 
+! -- last change: 05 Dec 2018 
+! now it supports more inputs with names of spectrometers  
+!! -- usage:   
+! @ combine_twoIFs.class  file1 file2  edge_channels
+! example: 
+! @ combine_twoIFs.class  a20160424_00013_01_0001.jcmt a20160424_00013_02_0001.jcmt   50  
+!! -- where 50 is the number of edge channels 
+!! -- last change: 05 Dec. 2018
+
+set     ext .jcmt 
+set     unit v c
+set     number *
+set     wei eq
+
+pen     /def 
+define  char*50  file1 file2 
+define  double xedge[4]
+define  int sm_times 
+define int f 
+define double N I0 V0 Dv 
+define  double edge 
+
+let sm_times 10
+begin procedure sm_spec 
+    for i 1 to sm_times 
+        sm box 2
+    next 
+end procedure sm_spec
+
+cl
+let  file1      &1
+let  file2      &2
+let  edge       &3
+
+file in 'file2'
+find
+get f 
+let xedge[1] rx[edge] 
+let xedge[2] rx['channels-edge']
+
+
+file in 'file1'
+find
+get f 
+let xedge[3]  rx[edge] 
+let xedge[4]  rx['channels-edge']
+
+let f found 
+
+sort xedge 
+
+set win xedge[1] xedge[2] xedge[3] xedge[4]
+set mod x xedge[1] xedge[4]
+
+sic dele 'file1'_cut.jcmt  
+file out 'file1'_cut.jcmt m
+for i 1 to found
+ get idx%num[i]
+ let N channels
+ let I0 reference
+ let V0 velocity
+ let Dv velo_step
+ extract 50 'N-50' C
+ base
+ write 
+next
+
+file in 'file2'
+find
+
+for i 1 to found
+ get idx%num[i]
+ let N channels
+ let I0 reference
+ let V0 velocity
+ let Dv velo_step
+ extract 50 'N-50' C
+ base
+ write f+i
+next
+
+
+file in 'file1'_cut.jcmt 
+find 
+sic dele 'file1'_combined.jcmt 
+file out 'file1'_combined.jcmt s
+for i 1 to found/2  
+    find   /num i i 
+    find a /num i+f 
+    ave /re
+    write 'i'
+next
+
+
+sic dele 'file1'_cut.jcmt
+
