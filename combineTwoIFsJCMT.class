@@ -63,7 +63,7 @@ for i 1 to found
  let V0 velocity
  let Dv velo_step
  extract 50 'N-50' C
- base
+ base 0
  write 
 next
 
@@ -77,7 +77,7 @@ for i 1 to found
  let V0 velocity
  let Dv velo_step
  extract 50 'N-50' C
- base
+ base 0
  write f+i
 next
 
