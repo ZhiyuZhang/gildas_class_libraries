@@ -11,22 +11,28 @@
 ! TODO: resample data into the same frame 
 ! TODO: 
 
+! Questions: Sometimes resampled spectra still do not match consistency. 
+
+! CHANGE: change average to stitch -- stitch does not have consistency problem - why? 
 
 ! -- pre-request: 
 ! -- All spectra should be aligned and the loaded index should be consistent.
 !  
 ! written by Zhiyu Zhang
 ! pmozhang@gmail.com
-! last update 15 Nov. 2018 
+! last update 18 Dec. 2018 
 
 
 set var bas read
+define double window1 window2
 
 cl
 set unit v
 
 set box default
-ave 
+!ave 
+stitch
+base
 pl
 
 !if  exist(W1) then 
@@ -43,6 +49,9 @@ else
 endif
 
 
+let window1 w1[1] 
+let window2 w2[1] 
+
 
 bas 
 
@@ -55,10 +64,13 @@ define inte   intchan1 intchan2
 
 
 ! --- load index 
-load !/nocheck
+load /nocheck spec
 ! --- get the rg% variable 
+set win 0 0
 base /index
 pl /index
+
+set win window1 window2
 
 cl
 
@@ -72,7 +84,8 @@ next
 
 ! --- plot the average spectrum in the upper panel ---  
 g\set box 3 25 10 20
-ave
+!ave
+stitch
 base
 spec 
 base 1 /pl
