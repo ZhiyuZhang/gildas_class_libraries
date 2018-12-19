@@ -1,13 +1,18 @@
-!! --Aim: combine spectral data of the two spectrometers in one sideband of JCMT 
-!! --written by Zhi-Yu Zhang : pmozhang@gmail.com 
-! -- last change: 05 Dec 2018 
-! now it supports more inputs with names of spectrometers  
-!! -- usage:   
-! @ combine_twoIFs.class  file1 file2  edge_channels
+! --Aim: combine spectral data of the two spectrometers in one sideband of JCMT 
+! -- TODO: 
+! 
+! -- usage:   
+! @ combine_twoIFs.class  file1 file2  [edge_channels  show] 
 ! example: 
-! @ combine_twoIFs.class  a20160424_00013_01_0001.jcmt a20160424_00013_02_0001.jcmt   50  
-!! -- where 50 is the number of edge channels 
-!! -- last change: 05 Dec. 2018
+! @ combine_twoIFs.class  a20160424_00013_01_0001.jcmt a20160424_00013_02_0001.jcmt   30 yes
+! -- where 30 is the number of edge channels 
+! -- The default value of edge channels to cut is 50 (when it's not given) 
+! -- yes means to show the combining progress; no input means without Xwindow plotting. 
+! -- written by Zhi-Yu Zhang : pmozhang@gmail.com 
+! -- last change: 19 Dec 2018 
+! now it supports more inputs with names of spectrometers  
+! now it supports 
+
 
 set     ext .jcmt 
 set     unit v c
@@ -15,10 +20,10 @@ set     number *
 set     wei eq
 
 pen     /def 
-define  char*50  file1 file2 
+define  char*50  file1 file2 show
 define  double xedge[4]
 define  int sm_times 
-define int f 
+define int fnum 
 define double N I0 V0 Dv 
 define  double edge 
 
@@ -32,7 +37,17 @@ end procedure sm_spec
 cl
 let  file1      &1
 let  file2      &2
+if PRO%NARG.ge.3 then
 let  edge       &3
+else
+let edge 50
+endif 
+if PRO%NARG.ge.4 then
+let  show       &4
+endif 
+
+
+
 
 file in 'file2'
 find
@@ -47,12 +62,13 @@ get f
 let xedge[3]  rx[edge] 
 let xedge[4]  rx['channels-edge']
 
-let f found 
+let fnum found 
 
 sort xedge 
 
 set win xedge[1] xedge[2] xedge[3] xedge[4]
 set mod x xedge[1] xedge[4]
+
 
 sic dele 'file1'_cut.jcmt  
 file out 'file1'_cut.jcmt m
@@ -62,10 +78,12 @@ for i 1 to found
  let I0 reference
  let V0 velocity
  let Dv velo_step
- extract 50 'N-50' C
+ extract 'edge' 'N-edge' C
  base 0
  write 
 next
+
+
 
 file in 'file2'
 find
@@ -76,22 +94,58 @@ for i 1 to found
  let I0 reference
  let V0 velocity
  let Dv velo_step
- extract 50 'N-50' C
+ extract 'edge' 'N-edge' C
  base 0
- write f+i
+ write fnum+i
 next
 
 
 file in 'file1'_cut.jcmt 
 find 
+get f 
+sm box 10
+set mod y t 
+base 0
+pl
+cl
+set mod y USER_YMAX*-1 USER_YMAX*1
+
 sic dele 'file1'_combined.jcmt 
 file out 'file1'_combined.jcmt s
-for i 1 to found/2  
-    find   /num i i 
-    find a /num i+f 
-    ave /re
-    write 'i'
-next
+
+if show.eq."yes" then
+    dev i b 
+    for i 1 to found/2  
+        find   /num i i 
+        get f 
+        sm box 10 
+        spec /pen 0
+        box
+        find a /num i+fnum 
+        get l
+        sm box 10 
+        spec /pen 1
+        ave /re
+        write 'i'
+        sm box 10 
+        spec /pen 4
+        say 'i'
+        say 'i+fnum'
+        draw win
+        sic wait 1
+        cl
+    next
+else
+    for i 1 to found/2  
+        find   /num i i 
+        get f 
+        find a /num i+fnum 
+        get f
+        ave /re
+        write 'i'
+    next
+
+endif 
 
 
 sic dele 'file1'_cut.jcmt

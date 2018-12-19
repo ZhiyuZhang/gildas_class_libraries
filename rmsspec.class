@@ -1,14 +1,23 @@
 ! 1. To calculate noise channel by channel 
 ! 2. To calculate the rms of an area  (velocity integrated Tb/flux) 
 ! 3. To calculate the noise in a velocity range (average Tb/flux). 
+! 4. To export the resulted spectrum and noise to ascii files 
+! 
+! USAGE: 
+! RMSSPEC [median] 
+
+! Example: 
+! rmsspec
+! this is the default version
+! 
+! rmsspec median
+! this also plots the median spectrum calculated from all spectra 
 
 ! Done: Consistent check by comparing with base 
 ! Done: Consider splitting sub-channel when doing integration 
 ! Done: Pre-existing window setting does not promote setting window now
 ! Done: Multiple baseline windows  
-! 
-! TODO: implement other output, e.g., Mean, Median, Max, Min, etc  
-! TODO: resample data into the same frame 
+! Partly Done: implement other output, e.g., Mean, Median, Max, Min, etc  
 ! TODO: 
 
 ! Questions: Sometimes resampled spectra still do not match consistency. 
@@ -17,10 +26,11 @@
 
 ! -- pre-request: 
 ! -- All spectra should be aligned and the loaded index should be consistent.
+! -- now it supports to show the median spectrum and to output it in an ascii file 
 !  
 ! written by Zhiyu Zhang
 ! pmozhang@gmail.com
-! last update 18 Dec. 2018 
+! last update 19 Dec. 2018 
 
 
 set var bas read
@@ -29,8 +39,15 @@ define double window1 window2
 cl
 set unit v
 
+
+define char*50 med
+
+if PRO%NARG.ge.1 then
+let  med         &1
+endif
+
+
 set box default
-!ave 
 stitch
 base
 pl
@@ -89,21 +106,36 @@ stitch
 base
 spec 
 base 1 /pl
-!draw win
+
+if med.eq."median"
+    let ry chan_median 
+    spec /pen 1
+else 
+endif
+draw win 
 box n n 
 axis YL
 greg averaged_spectrum /format 
 
+
+
+
+
 !  ---------------------------------------------------
 
 ! --- plot the noise spectrum in the lower panel   ---
-g\set box 3 25 3 10
 let ry_copy ry
+g\set box 3 25 3 10
 let ry chan_noise/sqrt(found)
 spec
-draw win 
+draw win
 box 
 greg noise_spectrum /format 
+let ry chan_median 
+greg median_spectrum /format 
+let ry ry_copy
+
+
 
 !  ---------------------------------------------------
 
