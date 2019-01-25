@@ -2,13 +2,13 @@
 ! -- TODO: 
 ! 
 ! -- usage:   
-! @ combine_twoIFs.class  file1 file2  [edge_channels  show] 
+! @ combineTwoIFsAPEX.class  file1 file2  [edge_channels  show] 
 ! example: 
-! @ combine_twoIFs.class  file1.apex  file2.apex 10 yes
+! @ combineTwoIFsAPEX.class  file1.apex  file2.apex 10 yes
 ! or 
-! @ combine_twoIFs.class  file1.apex  file2.apex 10 
+! @ combineTwoIFsAPEX.class  file1.apex  file2.apex 10 
 ! or 
-! @ combine_twoIFs.class  file1.apex  file2.apex 
+! @ combineTwoIFsAPEX.class  file1.apex  file2.apex 
 
 ! Requirement: file1.apex and file2.apex are aligned spectral data from spectrometer-1 and spectrometer-2.
 ! To do so, you can do the follow work to prepare file1.apex and file2.apex files: 
@@ -39,15 +39,14 @@ set     wei eq
 pen     /def 
 define  char*50  file1 file2 show
 define  double xedge[4]
-define  int sm_times 
-define int fnum 
-define double N I0 V0 Dv 
+define  int fnum 
+define  double N I0 V0 Dv 
 define  double edge 
 
-let sm_times 10
 begin procedure sm_spec 
-    for i 1 to sm_times 
-        sm box 2
+    for i 1 to 3
+        sm box 10 
+        say "smooth"
     next 
 end procedure sm_spec
 
@@ -122,7 +121,7 @@ next
 file in 'file1'_cut.jcmt 
 find 
 get f 
-sm box 10
+@sm_spec
 set mod y t 
 base 0
 pl
@@ -137,16 +136,16 @@ if show.eq."yes" then
         cl
         find   /num i i 
         get f 
-        sm box 10 
+        @sm_spec
         spec /pen 0
         box
         find a /num i+fnum 
         get l
-        sm box 10 
+        @sm_spec
         spec /pen 1
         ave /re
         write 'i'
-        sm box 10 
+        @sm_spec
         spec /pen 4
         say 'i'
         say 'i+fnum'
