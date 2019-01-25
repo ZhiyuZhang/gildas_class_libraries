@@ -11,6 +11,16 @@
 ! @ combine_twoIFs.class  file1.apex  file2.apex 
 
 ! Requirement: file1.apex and file2.apex are aligned spectral data from spectrometer-1 and spectrometer-2.
+! To do so, you can do the follow work to prepare file1.apex and file2.apex files: 
+!
+! file in all.apex
+! file out file1.apex s
+! find /source xxx /tel IF1 
+! copy
+! file out file2.apex s
+! find /source xxx /tel IF2
+! copy
+! 
 ! -- where 10 is the number of edge channels to get rid off.
 ! -- The default value of edge channels to cut is 5 (when it's not given) 
 ! -- For Apex data, the edge channels are normally not too bad, but still, better to cut a few for avoiding errors. 
