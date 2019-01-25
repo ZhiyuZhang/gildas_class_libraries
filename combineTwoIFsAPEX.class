@@ -1,0 +1,160 @@
+! --Aim: combine spectral data of the two spectrometers in one sideband and one polarisation of APEX 
+! -- TODO: 
+! 
+! -- usage:   
+! @ combine_twoIFs.class  file1 file2  [edge_channels  show] 
+! example: 
+! @ combine_twoIFs.class  file1.apex  file2.apex 10 yes
+! or 
+! @ combine_twoIFs.class  file1.apex  file2.apex 10 
+! or 
+! @ combine_twoIFs.class  file1.apex  file2.apex 
+
+! Requirement: file1.apex and file2.apex are aligned spectral data from spectrometer-1 and spectrometer-2.
+! -- where 10 is the number of edge channels to get rid off.
+! -- The default value of edge channels to cut is 5 (when it's not given) 
+! -- For Apex data, the edge channels are normally not too bad, but still, better to cut a few for avoiding errors. 
+! -- 'yes' means to show the combining progress in X-window; 'no input [blank]' (default) means to not show the Xwindow (faster) 
+! now it supports more inputs with names of spectrometers  
+! -- written by Zhi-Yu Zhang :pmozhang@gmail.com 
+! -- last change: 25 Jan 2019 
+
+
+
+set     ext .apex
+set     unit v c
+set     number *
+set     wei eq
+
+pen     /def 
+define  char*50  file1 file2 show
+define  double xedge[4]
+define  int sm_times 
+define int fnum 
+define double N I0 V0 Dv 
+define  double edge 
+
+let sm_times 10
+begin procedure sm_spec 
+    for i 1 to sm_times 
+        sm box 2
+    next 
+end procedure sm_spec
+
+cl
+let  file1      &1
+let  file2      &2
+if PRO%NARG.ge.3 then
+let  edge       &3
+else
+let edge 5
+endif 
+if PRO%NARG.ge.4 then
+let  show       &4
+endif 
+
+
+! ---- initialise spectrometer setups, by reading the first spectrum in each file
+
+file in 'file2'
+find
+get f 
+let xedge[1] rx[edge] 
+let xedge[2] rx['channels-edge']
+
+file in 'file1'
+find
+get f 
+let xedge[3]  rx[edge] 
+let xedge[4]  rx['channels-edge']
+
+let fnum found 
+
+sort xedge 
+
+set win xedge[1] xedge[2] xedge[3] xedge[4]
+set mod x xedge[1] xedge[4]
+!-----------------------------------------
+
+
+! ---------cut the edge channels of each spectrum 
+sic dele 'file1'_cut.jcmt  
+file out 'file1'_cut.jcmt m
+for i 1 to found
+ get idx%num[i]
+ let N channels
+ let I0 reference
+ let V0 velocity
+ let Dv velo_step
+ extract 'edge' 'N-edge' C
+ base 0
+ write 
+next
+
+
+file in 'file2'
+find
+
+for i 1 to found
+ get idx%num[i]
+ let N channels
+ let I0 reference
+ let V0 velocity
+ let Dv velo_step
+ extract 'edge' 'N-edge' C
+ base 0
+ write fnum+i
+next
+! -----------------------------------------
+
+! ----- read data, smooth it, and decide to plot the combining process or not
+
+file in 'file1'_cut.jcmt 
+find 
+get f 
+sm box 10
+set mod y t 
+base 0
+pl
+set mod y USER_YMAX*-1 USER_YMAX*1
+
+sic dele 'file1'_combined.jcmt 
+file out 'file1'_combined.jcmt s
+
+if show.eq."yes" then
+    dev i b 
+    for i 1 to found/2  
+        cl
+        find   /num i i 
+        get f 
+        sm box 10 
+        spec /pen 0
+        box
+        find a /num i+fnum 
+        get l
+        sm box 10 
+        spec /pen 1
+        ave /re
+        write 'i'
+        sm box 10 
+        spec /pen 4
+        say 'i'
+        say 'i+fnum'
+        draw win
+        sic wait 1
+    next
+else
+    for i 1 to found/2  
+        find   /num i i 
+        get f 
+        find a /num i+fnum 
+        get f
+        ave /re
+        write 'i'
+    next
+
+endif 
+
+
+sic dele 'file1'_cut.jcmt
+
