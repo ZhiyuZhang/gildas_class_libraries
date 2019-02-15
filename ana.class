@@ -26,6 +26,9 @@ axis xl
 pen 2
 points bchan  count
 pen 0
+label "Scan Number" /X
+label "Rms per channel (K)"    /Y
+
 
 dra t 5 10 "rms curve"
 pause
@@ -58,6 +61,8 @@ axis xl
 pen 2
 points bchan rrms 
 pen 0
+label "Scan Number" /X
+label "RRMS ratio" /X
 
 dra t 5 10 "Rms/Rms_theatrical ratio curve"
 pause
