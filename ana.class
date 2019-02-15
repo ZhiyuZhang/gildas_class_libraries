@@ -43,6 +43,8 @@ points bchan tsy
 pen 0
 
 dra t 5 10 "Tsys curve"
+label "Scan Number" /X
+label "Tsys (K)"    /Y
 pause
 
 
