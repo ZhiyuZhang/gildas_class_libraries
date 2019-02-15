@@ -87,8 +87,8 @@ set mod x xedge[1] xedge[4]
 
 
 ! ---------cut the edge channels of each spectrum 
-sic dele 'file1'_cut.jcmt  
-file out 'file1'_cut.jcmt m
+sic dele 'file1'_cut.apex  
+file out 'file1'_cut.apex m
 for i 1 to found
  get idx%num[i]
  let N channels
@@ -118,7 +118,7 @@ next
 
 ! ----- read data, smooth it, and decide to plot the combining process or not
 
-file in 'file1'_cut.jcmt 
+file in 'file1'_cut.apex 
 find 
 get f 
 @sm_spec
@@ -127,8 +127,8 @@ base 0
 pl
 set mod y USER_YMAX*-1 USER_YMAX*1
 
-sic dele 'file1'_combined.jcmt 
-file out 'file1'_combined.jcmt s
+sic dele 'file1'_combined.apex 
+file out 'file1'_combined.apex s
 
 if show.eq."yes" then
     dev i b 
@@ -165,5 +165,5 @@ else
 endif 
 
 
-sic dele 'file1'_cut.jcmt
+sic dele 'file1'_cut.apex
 
