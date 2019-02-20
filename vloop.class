@@ -16,12 +16,23 @@ define double input_reso
 say "please input the velocity resolution (km/s) you want to calculate Allan and Rrms"
 let input_reso &1  
 
+define char*200 TNAME ! /G 
+
+if PRO%NARG.ge.2 then
+    let  TNAME &2
+    say " ----------------------"
+    say " -------JCMT-----------"
+    say " ----------------------"
+    else
+    let TNAME "None" 
+endif
+
+
 !!!!!!!!!initialization 
 set box d
 define character com*10
 on error next
 clear
-!set cur of
 get f
 
 let times nint(log10(abs(input_reso/velo_step))/log10(2.))
@@ -38,8 +49,14 @@ base /pl
 
 !!!!!!!!!!!!!!!!!!!!sub-procedures!!!!!!!!!!!!!!!!!!!!!
 begin procedure rms
+define char*200 tname 
+let tname &1
 analyse\draw text 20 14 "Rrms:             "
+if tname.eq."JCMT" then 
+analyse\draw text 22 14  ' nint(sigma/(Tsys*1.04*1.23/sqrt(abs(freq_step*1e6*time))*sqrt(1+1/sqrt(3*3))*1.22)*100)/100'"  JCMT"
+else
 analyse\draw text 22 14 'nint(sigma/(Tsys*1.4/sqrt(abs(freq_step*1e6*time)))*100)/100'
+endif 
 analyse\draw window
 end procedure rms 
 
@@ -130,7 +147,7 @@ if ((abs(phy_curs[1]-21).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(abs(phy_curs[1]-1
        base
        pl
        base /pl	
-      @rms
+      @rms 'tname'
 	  @allan 'times'
       dra t  5 12  'scan' 
       bas
@@ -143,7 +160,7 @@ else if (abs(phy_curs[1]-23).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.e
         base
         pl
        	base /pl
-	  @rms
+	  @rms  'tname'
 	  @allan 'times'
       dra t  5 12  'scan' 
 
@@ -166,7 +183,7 @@ else if (abs(phy_curs[1]-23).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.
       set box d
       pl
       base /pl
-      @rms
+      @rms 'tname'
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!DROP
 else if (cursor_code.eq."D") then
      pen 1
@@ -181,7 +198,7 @@ else if (abs(phy_curs[1]-7.5).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code
 	   set box d
         pl
        base /pl
-		@rms
+		@rms 'tname'
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!HELP !
 else if (cursor_code.eq."H").OR.(cursor_code.eq."?") then
 pen 2
@@ -284,4 +301,4 @@ say "Input invalid"
 endif
 next   
 
-
+dele var tname 
