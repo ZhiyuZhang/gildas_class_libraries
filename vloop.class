@@ -15,7 +15,8 @@
 ! --        @vloop 20   
 !           20 km/s is the velocity resolution for the rms noise estimate 
 ! --        press ? or H in the X11 window for help 
-! --
+! --        
+!           Special for JCMT-Harp data -- A different Tsys calculation function is adopted: 
 ! --        file in test.jcmt
 ! --        find
 ! --        @vloop 10 JCMT 
