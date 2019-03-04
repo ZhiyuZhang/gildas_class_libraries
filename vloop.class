@@ -2,6 +2,7 @@
 !!!!    update the input to be the closest velocity resolution Jun. 2016  
 !!      update example 03 Nov 2016 
 !!      update Telescope support for Tsys calculation of different galaxies. 20 Feb. 2019
+!!      update change smooth to resample. 4 Mar. 2019 
 !!!!!!! If you have any comment or question, please contact to Zhiyu Zhang: pmozhang@gmail.com
 
 ! -----------------------------------------------------------------------
@@ -11,7 +12,8 @@
 ! --        Example: 
 ! --        file in xxx.30m
 ! --        find 
-! --        @vloop 20 ! 20 km/s resolution for the rms noise estimate 
+! --        @vloop 20   
+!           20 km/s is the velocity resolution for the rms noise estimate 
 ! --        press ? or H in the X11 window for help 
 ! --
 ! --        file in test.jcmt
@@ -19,7 +21,7 @@
 ! --        @vloop 10 JCMT 
 ! -----------------------------------------------------------------------
 
-define inte times 
+define inte reso_scales 
 define double input_reso 
 say "please input the velocity resolution (km/s) you want to calculate Allan and Rrms"
 let input_reso &1  
@@ -43,7 +45,7 @@ on error next
 clear
 get f
 
-let times nint(log10(abs(input_reso/velo_step))/log10(2.))
+let reso_scales abs(input_reso/velo_step)
 
 pl
 if 'SET%LAS%WIND1[1]'.eq.0 then
@@ -56,17 +58,38 @@ bas
 base /pl
 
 !!!!!!!!!!!!!!!!!!!!sub-procedures!!!!!!!!!!!!!!!!!!!!!
+
+! --define rms ratios 
 begin procedure rms
-define char*200 tname 
-let tname &1
-analyse\draw text 20 14 "Rrms:             "
-if tname.eq."JCMT" then 
-analyse\draw text 22 14  ' nint(sigma/(Tsys*1.04*1.23/sqrt(abs(freq_step*1e6*time))*sqrt(1+1/sqrt(3*3))*1.22)*100)/100'"  JCMT"
-else
-analyse\draw text 22 14 'nint(sigma/(Tsys*1.4/sqrt(abs(freq_step*1e6*time)))*100)/100'
-endif 
-analyse\draw window
+    define char*200 tname 
+    define double K 
+    let tname &1
+    analyse\draw text 20 14 "Rrms:             "
+    if tname.eq."JCMT" then 
+    analyse\draw text 22 14  ' nint(sigma/(Tsys*1.04*1.23/sqrt(abs(freq_step*1e6*time))*sqrt(1+1/sqrt(3*3))*1.22)*100)/100'"  JCMT"
+    else
+    let K sqrt(4) ! This is for apex, after combining two IFs 
+    analyse\draw text 22 14 'nint(sigma/(Tsys*K/sqrt(abs(freq_step*1e6*time)))*100)/100'
+    endif 
+    analyse\draw window
 end procedure rms 
+
+
+
+! --define allan deviation
+begin procedure allan 
+    define real sigma1 sigma2 reso_scales_sub  
+    let reso_scales_sub &1 
+    bas
+    let sigma1 'sigma'
+    resample nint(channels/reso_scales_sub) reference/reso_scales_sub velocity velo_step*reso_scales_sub velo
+    bas
+    let sigma2 'sigma'
+    analyse\draw text 20 13 "allan "
+    analyse\draw text 23 13 'nint(sigma2/sigma1*100 *sqrt(reso_scales_sub))/100'
+end procedure allan
+
+
 
 
 begin procedure drawbox
@@ -118,29 +141,9 @@ pen /def
 end procedure drawbox
 
 
-begin procedure allan 
-define real sigma1 sigma2 times1  
-let times1 &1 
-bas
-let sigma1 'sigma'
-for i 1 to times1
-sm box 2
-next 
-bas
-let sigma2 'sigma'
-analyse\draw text 20 13 "allan "
-analyse\draw text 23 13 'nint(sigma2/sigma1*100 *1.414^times1)/100'
-end procedure allan
 
 for /while 1.EQ.1
 say " press S -> smooth; N -> next; P -> previous; Q -> quit; H -> help"
-!sic dele output.dat
-!list /out output.dat
-!sic out numbers.dat 
-!for ii 1 to found
-!say 'number'
-!next
-!sic out 
 @drawbox
 
 !!!!!!!!!!!!!!!!!Get cursor positions !!!!!!!!!!
@@ -156,7 +159,7 @@ if ((abs(phy_curs[1]-21).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(abs(phy_curs[1]-1
        pl
        base /pl	
       @rms 'tname'
-	  @allan 'times'
+	  @allan 'reso_scales'
       dra t  5 12  'scan' 
       bas
 	  get
@@ -169,7 +172,7 @@ else if (abs(phy_curs[1]-23).LT.1.AND.abs(phy_curs[2]-1).LT.1).OR.(cursor_code.e
         pl
        	base /pl
 	  @rms  'tname'
-	  @allan 'times'
+	  @allan 'reso_scales'
       dra t  5 12  'scan' 
 
 	  bas
@@ -179,7 +182,7 @@ else if abs(phy_curs[1]-25).LT.1.AND.abs(phy_curs[2]-1).LT.1 then
 		set box d
 		base
 		fft 
-		@allan 'times'
+		@allan 'reso_scales'
 		dra
 		pause
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -202,7 +205,7 @@ dra t  5 12  "Dropped"
      drop
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! SMOOTHING
 else if (abs(phy_curs[1]-7.5).LT.3.AND.abs(phy_curs[2]-16).LT.1).OR.(cursor_code.eq."S") then
-       sm 
+    resample nint(channels/2) reference/2 velocity velo_step*2 velo
 	   set box d
         pl
        base /pl
