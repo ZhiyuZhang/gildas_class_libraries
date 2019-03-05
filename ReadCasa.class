@@ -1,26 +1,65 @@
 ! read_alma.class for converting spectral file in ascii format exported from CASA viewer  
-! the input file format should be freq in GHz and flux in Jy (or in Jy/beam)
+! the input file format should be freq in GHz(default), MHz, or Hz, and flux in Jy (or in Jy/beam)
 ! #freq(GHz),flux(Jy)
 ! 79.98991668083,0.0009923597424891897 
 ! xxx           , xxx 
+
+! updated on 5 Mar 2019 
 ! written by Zhiyu Zhang pmozhang@gmail.com 
 
-define char InputFile*100 OutputFile*100 SourceName*100
-let         InputFile  &1 
-let        OutputFile  &2 
-let         SourceName &3
+!  Usage:
+!  readcasa input.txt output.alma source_name [freq_unit] 
+!  Example-1: when the frequency unit is in GHz 
+!  readcasa spw0.txt spw0.alma test 
+!  
+!  Example-2: when the frequency unit is in MHz (or Hz, or GHz)
+!  readcasa spw0.txt spw0.alma test MHz 
 
+
+define char InputFile*100 OutputFile*100 SourceName*100
+define char*200 funit 
+define double conversion_factor 
+
+let         InputFile    &1 
+let        OutputFile    &2 
+let        SourceName    &3
+let conversion_factor   1E3
+!--------------------------
+! by default, funit is GHz 
+!-------------------------
+
+if PRO%NARG.ge.4 then
+    let  funit &4
+    if funit.eq."GHz" then
+            let conversion_factor 1E3 
+    else if funit.eq."MHz" then
+            let conversion_factor 1 
+    else if funit.eq."Hz" then
+            let conversion_factor 1E-3 
+    else
+        let conversion_factor 1E3 
+        say " -----------------------"
+        say " ----Wrong input Unit---"
+        say " ---use GHz by default--"
+        say " -----------------------"
+    endif 
+endif
+
+say " -----------------------"
+say " ----Assuming VLSR   ---"
+say " -----------------------"
 
 sic dele 'OutputFile'
 file out 'OutputFile' s 
 
 set var SPECTRO write  
 col x 1 y 2 /file 'InputFile'  /comment "#" 
-
-let x x*1e3      ! from GHz to MHz
+let x x*conversion_factor     
+! from funit to MHz
 
 model y /XAXIS 1 x[1] x[2]-x[1] freq
-! -----   x[1] is the frequency of the first channel  
+
+! -----   x[1]       is the frequency of the first channel  
 ! -----   x[2]-x[1]  is the channel width 
 
 modify source 'SourceName'

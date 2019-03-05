@@ -1,16 +1,19 @@
 1 READCASA 
-       READCASA in_file_name out_file_name out_source_name 
+       READCASA in_file_name out_file_name out_source_name [freq_unit]
        The aim of this script is to convert the ascii file exported from CASA viewer into class format.  
 
        by Zhiyu Zhang  (pmozhang@gmail.com)  
        last update: 27 Apr. 2017 
+       updated on 5 Mar 2019
 
-       USAGE:
-       readcasa input.dat output.pdbi UR94482
-       file in output.pdbi 
-       find 
-       get f
-       pl
+       Usage:
+       readcasa input.txt output.alma source_name [freq_unit]
+
+       Example-1: when the frequency unit is in GHz
+       readcasa spw0.txt spw0.alma test
+       
+       Example-2: when the frequency unit is in MHz (or Hz, or GHz)
+       readcasa spw0.txt spw0.alma test MHz
 
        This is a detailed description of READCASA.
 1 ENDOFHELP
