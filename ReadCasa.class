@@ -24,6 +24,7 @@ model y /XAXIS 1 x[1] x[2]-x[1] freq
 ! -----   x[2]-x[1]  is the channel width 
 
 modify source 'SourceName'
+set vel L
 pl
 write 1
 next 
