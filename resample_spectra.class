@@ -15,8 +15,8 @@
 
 define char*50 resample_logic 
 define double N I0 V0 Dv N_out I0_out V0_out Dv_out
-sic dele resampled.jcmt
-file out resampled.jcmt m  
+sic dele resampled.30m 
+file out resampled.30m m  
 
 
 say "USE the first spectrum in the list as the template? [Y/N]"
@@ -43,5 +43,5 @@ for i 1 to found
     write i
 next
 
-file in resampled.jcmt
+file in resampled.30m
 find
