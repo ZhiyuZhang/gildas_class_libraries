@@ -19,7 +19,7 @@ sic dele resampled.jcmt
 file out resampled.jcmt m  
 
 
-say "USE the first spectrum in the list as the template? "
+say "USE the first spectrum in the list as the template? [Y/N]"
 let resample_logic &1
 if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES").or.(resample_logic.eq."yes") then
 
@@ -29,7 +29,7 @@ if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES
     let V0 velocity
     let Dv velo_step
 else 
-Say "Please input your own configurations (in velocity)"
+Say "Please input your own configurations (in velocity) [N I0 V0 Dv]"
     let N  &2
     let I0 &3
     let V0 &4
