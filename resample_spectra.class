@@ -14,7 +14,7 @@
 ! last update 15 Nov. 2018
 
 define char*50 resample_logic 
-define double N I0 V0 Dv N_out I0_out V0_out Dv_out
+define double N I0 V0 Dv F0 N_out I0_out V0_out Dv_out
 sic dele resampled.jcmt
 file out resampled.jcmt m  
 
@@ -28,6 +28,7 @@ if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES
     let I0 reference
     let V0 velocity
     let Dv velo_step
+    let F0 frequency
 else 
 Say "Please input your own configurations (in velocity)"
     let N  &2
@@ -39,6 +40,7 @@ endif
 
 for i 1 to found
     get idx%num[i] 
+    modify frequency F0
     resample  N I0 v0 Dv velocity
     write i
 next
