@@ -19,7 +19,7 @@ next
 compute maxsig max count
 
 set mod x 0 found
-set mod y 0 maxsig
+set mod y 0 maxsig*1.2
 cl
 box n 
 axis xl
@@ -37,7 +37,7 @@ cl
 compute maxsig max tsy 
 
 set mod x 0 found
-set mod y 0 maxsig
+set mod y 0 maxsig*1.2
 cl
 box n 
 axis xl
@@ -54,7 +54,7 @@ pause
 compute maxsig max rrms 
 
 set mod x 0   found
-set mod y 0.8 1.5 
+set mod y 0.8 maxsig*1.2 
 cl
 box n 
 axis xl

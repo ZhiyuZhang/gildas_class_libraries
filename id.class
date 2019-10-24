@@ -37,6 +37,13 @@ draw mole  86243.430/(1+z) SiO2-1v1
 draw mole  86846.995/(1+z) SiO2-1v0
 
 
+draw mole  109782.1734/(1+z)  C18O10
+draw mole  110201.3542798/(1+z)  13CO10
+draw mole  112359.2837/(1+z)  C17O10
+
+
+
+
 
 
 
@@ -128,9 +135,32 @@ draw molecule 461047.68/(1+z)    CO4-3
 
 
 
+draw molecule   112359.2837/(1+z)    C17O1-0
+draw molecule   224714.3850/(1+z)    C17O2-1
+draw molecule   337061.1298/(1+z)    C17O3-2
+draw molecule   449395.3412/(1+z)    C17O4-3
+draw molecule   561712.7845/(1+z)    C17O5-4
+draw molecule   674009.3443/(1+z)    C17O6-5
+draw molecule   786280.8166/(1+z)    C17O7-6
+draw molecule   898523.0217/(1+z)    C17O8-7
+draw molecule  1010731.7805/(1+z)    C17O9-8
+draw molecule  1122902.9148/(1+z)    C17O10-9
 
 
 
+
+
+draw molecule 262004.2/(1+z)        C2H3-2
+draw molecule 349338.7/(1+z)        C2H4-3
+draw molecule 436660.4/(1+z)        C2H5-4
+draw molecule 523970.4/(1+z)        C2H6-5
+
+
+draw molecule 109173.6/(1+z)        HC3N12-11
+draw molecule 109252.2/(1+z)        SO_32-21
+draw molecule 109463.1/(1+z)        OCS_9-8
+
+draw molecule 108780.2/(1+z)        13CN
 
 
 
@@ -159,11 +189,11 @@ draw mole (frequency+(image-115271.202/(1+z))) CO10
 if (velo_step*FREQ_STEP).lt.0 then
 pen 1 /wei 1
 draw mole (frequency+(image-115271.202/(1+z))) CO10
-draw mole (frequency+(image-110201.354/(1+z))) 13CO10
-draw mole (frequency+(image-109.782176/(1+z))) C18O10
+!draw mole (frequency+(image-110201.354/(1+z))) 13CO10
+!draw mole (frequency+(image-109.782176/(1+z))) C18O10
 draw mole (frequency+(image-2*115271.202/(1+z))) CO21
-draw mole (frequency+(image-2*110201.354/(1+z))) 13CO21
-draw mole (frequency+(image-219.560358/(1+z))) C18O21
+!draw mole (frequency+(image-2*110201.354/(1+z))) 13CO21
+!draw mole (frequency+(image-219.560358/(1+z))) C18O21
 pen /def 
 
 else
