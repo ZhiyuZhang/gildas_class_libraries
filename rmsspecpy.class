@@ -1,4 +1,4 @@
-
+!  ------- under development ---------
 ! 1. To calculate noise channel by channel 
 ! 2. To calculate the rms of an area  (velocity integrated Tb/flux) 
 ! 3. To calculate the noise in a velocity range (average Tb/flux). 
@@ -19,7 +19,9 @@
 ! Done: Pre-existing window setting does not promote setting window now
 ! Done: Multiple baseline windows  
 ! Partly Done: implement other output, e.g., Mean, Median, Max, Min, etc  
-! TODO: 
+! TODO: Integrate python plotting tool.
+! Now I am stuck with python versions. 
+! It seems that gildas only supports python2.7 ??? I can not set support for anaconda .
 
 ! Questions: Sometimes resampled spectra still do not match consistency. 
 
@@ -34,7 +36,6 @@
 ! last update 19 Dec. 2018 
 
 
-set velo L
 set var bas read
 define double window1 window2
 
@@ -100,8 +101,6 @@ compute chan_mean[i]   mean   rg[i,]
 compute chan_noise[i]  rms    rg[i,]
 compute chan_median[i] median rg[i,]
 next 
-!exam chan_noise
-!pause
 
 ! --- plot the average spectrum in the upper panel ---  
 g\set box 3 25 10 20
@@ -113,20 +112,16 @@ base 1 /pl
 
 if med.eq."median"
     let ry chan_median 
-    base 1 
     spec /pen 1
-    pen 1 /wei 2 
-    draw t 21 19  "median" 
-    pen 0 /wei 2
 else 
 endif
-    draw t 21 18  "mean"  
-    draw t 5 19  "Averaged Spectrum" 
 draw win 
 box n n 
 axis YL
-set mod x t
 greg averaged_spectrum /format 
+
+
+
 
 
 !  ---------------------------------------------------
@@ -135,14 +130,7 @@ greg averaged_spectrum /format
 let ry_copy ry
 g\set box 3 25 3 10
 let ry chan_noise/sqrt(found)
-!define double maxnoise 
-!compute maxnoise max ry 
-!say 'maxnoise'
-!set mod y 0 'maxnoise'
 spec
-!set mod y t
-
-draw t 5 9  "Noise Spectrum" 
 draw win
 box 
 greg noise_spectrum /format 
@@ -153,8 +141,8 @@ let ry ry_copy
 
 
 !  ---------------------------------------------------
-!  -- extract flux(area) covered by line-emitting windows
-!  ---------------------------------------------------
+
+
 
 for i 1 to 40
     if w1[i].ne.0.and.w2[i].ne.0 then 
@@ -210,13 +198,14 @@ for i 1 to 40
     if rmssq[i].ne.0 then 
         say "-----------------------------------------" 
         say "window" 'i' 
-        say "RMS per channel (K):"             'rmssq[i]'
-        say "Integrated flux (K km/s):"        'AreaFlux[i]' 
-        say "Integrated flux error (K km/s):"  'areanoise[i]'
+        say "RMS per channel"             'rmssq[i]'
+        say "Integrated flux:"         'AreaFlux[i]' 
+        say "Integrated flux error:"  'areanoise[i]'
 !       say "channels within window:"  'winchans[i]'
 !       say "velocity within window:"  'abs(w1[i]-w2[i])'
 !       say "sum of all chans in window"  'ry_copy_sum[i]'
         say "-----------------------------------------" 
      endif 
 next
+
 

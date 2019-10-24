@@ -15,10 +15,8 @@ cl
 set     mod        y t 
 set     char       0.6
 multiply 1000
+set mod x t
 
-compute maxy max ry 
-compute miny min ry 
-set mod y miny*1.1 maxy*1.6
 
 !--------- resample to our desired velocity resolution -------
 let N channels
@@ -31,6 +29,12 @@ let v0_out v0
 let Dv_out input_reso*DV/abs(DV)
 resample  N_out I0_out  v0_out Dv_out velocity
 !-----------------------------------------------------------
+
+compute maxy max ry 
+compute miny min ry 
+set mod y t
+!set mod y miny maxy*1.6
+
 
 box
 spec 
@@ -123,7 +127,7 @@ draw upper   906206.1/(1+redshift)    p-H2O9_2_8-8_3_5
 draw upper    110201.4/(1+redshift)    13CO1-0 
 draw upper    220398.7/(1+redshift)    13CO2-1 
 draw upper    330588.0/(1+redshift)    13CO3-2 
-draw upper    440765.2/(1+redshift)    13CO4-3 
+draw upper    440765.2/(1+redshift)    13CO4-3
 draw upper    550926.3/(1+redshift)    13CO5-4 
 draw upper    661067.3/(1+redshift)    13CO6-5 
 draw upper    771184.1/(1+redshift)    13CO7-6 
@@ -142,6 +146,19 @@ draw upper  768251.6/(1+redshift)    C18O7-6
 draw upper  877922.0/(1+redshift)    C18O8-7    
 draw upper  987560.4/(1+redshift)    C18O9-8    
 draw upper 1097162.9/(1+redshift)    C18O10-9    
+
+
+draw upper   112359.2837/(1+redshift)    C17O1-0    
+draw upper   224714.3850/(1+redshift)    C17O2-1    
+draw upper   337061.1298/(1+redshift)    C17O3-2    
+draw upper   449395.3412/(1+redshift)    C17O4-3    
+draw upper   561712.7845/(1+redshift)    C17O5-4    
+draw upper   674009.3443/(1+redshift)    C17O6-5    
+draw upper   786280.8166/(1+redshift)    C17O7-6    
+draw upper   898523.0217/(1+redshift)    C17O8-7    
+draw upper  1010731.7805/(1+redshift)    C17O9-8    
+draw upper  1122902.9148/(1+redshift)    C17O10-9    
+   
 
 
 
