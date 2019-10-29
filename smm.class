@@ -1,0 +1,12 @@
+define double smm
+let smm &1
+
+sic dele smm.jcmt
+file out smm.jcmt s
+for i 1 to found
+    get idx%num[i]
+    sm box smm
+    write i
+next
+file in smm.jcmt
+find

@@ -1,0 +1,45 @@
+define double sig1 num  win1 win2 maxy miny maxyx minyx 
+say "please input num of sigma, for example, 5 (sigma)"
+let num &1
+let sig1 0
+
+compute maxy max ry 
+compute miny min ry 
+let maxyx rx /where ry.eq.maxy 
+
+
+
+!  say "please input windows (currently only one pair)"
+!  let win1 &2 
+!  let win2 &3 
+
+set win win1 win2 
+bas 0
+
+define double ryori rymedian ryl ryll  ryr ryrr /like ry 
+let ryori ry
+define double ryy[channels,5] 
+
+for /while abs((sig1-sigma)/sigma).gt.0.01
+base
+let sig1 sigma
+let ryl[2:'channels']    ry[1:'channels-1']
+let ryll[3:'channels']   ry[1:'channels-2']
+let ryr[1:'channels-1']  ry[2:'channels']
+let ryrr[1:'channels-2'] ry[3:'channels']
+let ryy[,1] ryll
+let ryy[,2] ryl
+let ryy[,3] ryori
+let ryy[,4] ryr 
+let ryy[,5] ryrr 
+
+comput rymedian median ryy
+!let ry rymedian 
+let ry = rymedian+random(sig1) /where abs(rymedian-ryori).gt.(num*sig1)
+
+pl
+bas
+say 'sig1'  /for f15.5 
+say 'sigma'  /for f15.5 
+
+next

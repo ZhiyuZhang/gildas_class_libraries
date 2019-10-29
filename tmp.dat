@@ -1,0 +1,92 @@
+set bad and
+set angle sec 
+dev i b
+set pl h
+set align v c
+set for l
+set unit v f
+pen /wei 2
+set ext .30m 
+set mod y t
+set mod x t
+set no
+sic edit vi
+g\set font DUPLEX
+define command vloop         "@/data/scripts/class_extensions/vloop.class" "oldpwd/vloop.hlp"
+define command id            "@/data/scripts/class_extensions/id.class"    "oldpwd/id.hlp"
+define command zd            "@/data/scripts/class_extensions/zd.class"    "oldpwd/zd.hlp"
+define command ttag          "@/data/scripts/class_extensions/tag.class"   "oldpwd/tag.hlp"
+define command rspec         "@/data/scripts/class_extensions/rspec.class" "oldpwd/rspec.hlp"
+define command rrms          "@/data/scripts/class_extensions/rrms.class"
+define command c1            "@/data/scripts/class_extensions/c1.class"    "oldpwd/c1.hlp"
+define command c2            "@/data/scripts/class_extensions/c2.class"    !"oldpwd/c1.hlp"
+define command ana           "@/data/scripts/class_extensions/ana.class"
+define command wout          "@/data/scripts/class_extensions/wout.class"
+define command gbt2class     "@/data/scripts/class_extensions/convert.class"
+define command error         "@/data/scripts/class_extensions/error.class" "oldpwd/error.hlp"
+define command allan_v       "@/data/scripts/class_extensions/allan.class"
+define command lumisun       "@/data/scripts/class_extensions/luminositysun.class" "oldpwd/luminositysun.hlp"
+define command lluminosity   "@/data/scripts/class_extensions/lluminosity.class" "oldpwd/lluminosity.hlp"
+define command sssb          "@/data/scripts/class_extensions/SourceGau.class" "oldpwd/SourceGau.hlp"
+define command splot         "@/data/scripts/class_extensions/splot.class" ! "oldpwd/SourceGau.hlp"
+define command dvdr          "@/data/scripts/class_extensions/dvdr.class"      "oldpwd/dvdr.hlp"
+define command massCI10      "@/data/scripts/class_extensions/massCI10.class"      "oldpwd/massCI10.hlp"
+define command massCI21      "@/data/scripts/class_extensions/massCI21.class"     ! "oldpwd/massCI10.hlp"
+define command voigt         "@/data/scripts/class_extensions/voigt.class"
+define command hanning       "@/data/scripts/class_extensions/hanning.class" "oldpwd/hanning.hlp"
+define command readcasa      "@/data/scripts/class_extensions/readcasa.class" "oldpwd/readcasa.hlp"
+define command zsmooth       "@/data/scripts/class_extensions/zsmooth.class"      "oldpwd/zsmooth.hlp"
+! for JCMT MALATANG
+define command rmsspec       "@/data/scripts/class_extensions/rmsspec.class"
+define command rmsspecpy     "@/data/scripts/class_extensions/rmsspecpy.class"
+define command rsp           "@/data/scripts/class_extensions/resample_spectra.class" "oldpwd/rsp.hlp"
+define command check_rec     "@/data/scripts/class_extensions/check_rev.class"
+define command addall        "@/data/scripts/class_extensions/addall.class"
+define command sm20          "@/data/scripts/class_extensions/sm20.class"
+define command comIFJCMT     "@/data/scripts/class_extensions/combineTwoIFsJCMT.class" "oldpwd/combineTwoIFsJCMT.hlp"
+set bad and
+set angle sec 
+dev i b
+set pl h
+set align v c
+set for l
+set unit v f
+pen /wei 2
+set ext .30m 
+set mod y t
+set mod x t
+set no
+sic edit vi
+g\set font DUPLEX
+define command vloop         "@/data/scripts/class_extensions/vloop.class" "oldpwd/vloop.hlp"
+define command id            "@/data/scripts/class_extensions/id.class"    "oldpwd/id.hlp"
+define command zd            "@/data/scripts/class_extensions/zd.class"    "oldpwd/zd.hlp"
+define command ttag          "@/data/scripts/class_extensions/tag.class"   "oldpwd/tag.hlp"
+define command rspec         "@/data/scripts/class_extensions/rspec.class" "oldpwd/rspec.hlp"
+define command rrms          "@/data/scripts/class_extensions/rrms.class"
+define command c1            "@/data/scripts/class_extensions/c1.class"    "oldpwd/c1.hlp"
+define command c2            "@/data/scripts/class_extensions/c2.class"    !"oldpwd/c1.hlp"
+define command ana           "@/data/scripts/class_extensions/ana.class"
+define command wout          "@/data/scripts/class_extensions/wout.class"
+define command gbt2class     "@/data/scripts/class_extensions/convert.class"
+define command error         "@/data/scripts/class_extensions/error.class" "oldpwd/error.hlp"
+define command allan_v       "@/data/scripts/class_extensions/allan.class"
+define command lumisun       "@/data/scripts/class_extensions/luminositysun.class" "oldpwd/luminositysun.hlp"
+define command lluminosity   "@/data/scripts/class_extensions/lluminosity.class" "oldpwd/lluminosity.hlp"
+define command sssb          "@/data/scripts/class_extensions/SourceGau.class" "oldpwd/SourceGau.hlp"
+define command splot         "@/data/scripts/class_extensions/splot.class" ! "oldpwd/SourceGau.hlp"
+define command dvdr          "@/data/scripts/class_extensions/dvdr.class"      "oldpwd/dvdr.hlp"
+define command massCI10      "@/data/scripts/class_extensions/massCI10.class"      "oldpwd/massCI10.hlp"
+define command massCI21      "@/data/scripts/class_extensions/massCI21.class"     ! "oldpwd/massCI10.hlp"
+define command voigt         "@/data/scripts/class_extensions/voigt.class"
+define command hanning       "@/data/scripts/class_extensions/hanning.class" "oldpwd/hanning.hlp"
+define command readcasa      "@/data/scripts/class_extensions/readcasa.class" "oldpwd/readcasa.hlp"
+define command zsmooth       "@/data/scripts/class_extensions/zsmooth.class"      "oldpwd/zsmooth.hlp"
+! for JCMT MALATANG
+define command rmsspec       "@/data/scripts/class_extensions/rmsspec.class"
+define command rmsspecpy     "@/data/scripts/class_extensions/rmsspecpy.class"
+define command rsp           "@/data/scripts/class_extensions/resample_spectra.class" "oldpwd/rsp.hlp"
+define command check_rec     "@/data/scripts/class_extensions/check_rev.class"
+define command addall        "@/data/scripts/class_extensions/addall.class"
+define command sm20          "@/data/scripts/class_extensions/sm20.class"
+define command comIFJCMT     "@/data/scripts/class_extensions/combineTwoIFsJCMT.class" "oldpwd/combineTwoIFsJCMT.hlp"
