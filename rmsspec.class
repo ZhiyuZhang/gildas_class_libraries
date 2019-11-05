@@ -38,6 +38,7 @@
 
 set velo L
 set var bas read
+set mod  y t
 define double window1 window2 vmin vmax
 
 
@@ -45,8 +46,8 @@ cl
 set unit v
 
 
-let vmin R%HEAD%PLO%VMIN 
-let vmax R%HEAD%PLO%VMAX 
+!let vmin R%HEAD%PLO%VMIN 
+!let vmax R%HEAD%PLO%VMAX 
 
 
 
@@ -136,7 +137,8 @@ axis YL
 set mod x t
 greg averaged_spectrum /format 
 
-set mod x vmin vmax 
+!set mod x vmin vmax 
+set mod x t
 
 
 !  ---------------------------------------------------
@@ -145,13 +147,15 @@ set mod x vmin vmax
 let ry_copy ry
 g\set box 3 25 3 10
 let ry chan_noise/sqrt(found)
-!define double maxnoise 
-!compute maxnoise max ry 
+define double meannoise 
+compute meannoise mean ry 
 !say 'maxnoise'
 !set mod y 0 'maxnoise'
-spec
-!set mod y t
 
+set mod y 0  meannoise*1.5
+spec
+
+set mod y t
 draw t 5 9  "Noise Spectrum" 
 draw win
 box 
