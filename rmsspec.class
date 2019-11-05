@@ -122,10 +122,10 @@ endif
 draw win 
 box n n 
 axis YL
-set mod x t
+set mod x USER_XMIN USER_XMAX  
 greg averaged_spectrum /format 
 
-set mod x t
+set mod x USER_XMIN USER_XMAX  
 
 
 !  ---------------------------------------------------
