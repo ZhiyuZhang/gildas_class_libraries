@@ -103,10 +103,12 @@ next
 ! --- plot the average spectrum in the upper panel ---  
 g\set box 3 25 10 20
 !ave
-stitch
-base
+!stitch
+let ry chan_mean
+
 spec 
 base 1 /pl
+pause
 
 if med.eq."median"
     let ry chan_median 
