@@ -20,15 +20,15 @@ file out resampled.30m m
 
 say "USE the first spectrum in the list as the template? [Y/N]"
 let resample_logic &1
-if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES").or.(resample_logic.eq."yes") then
-
     get f 
+if (resample_logic.eq."Y").or.(resample_logic.eq."y").or.(resample_logic.eq."YES").or.(resample_logic.eq."yes") then
     let N channels
     let I0 reference
     let V0 velocity
     let Dv velo_step
     let F0 frequency
 else 
+    let F0 frequency
 Say "Please input your own configurations (in velocity) [N I0 V0 Dv]"
     let N  &2
     let I0 &3
@@ -40,9 +40,11 @@ endif
 for i 1 to found
     get idx%num[i] 
     modify frequency F0
-    resample  N I0 v0 Dv velocity
+    resample N I0 v0 Dv velocity
     write i
 next
 
 file in resampled.30m
 find
+
+
