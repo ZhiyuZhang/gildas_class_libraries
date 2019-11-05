@@ -9,7 +9,7 @@ pen /wei 2
 set ext .30m 
 set mod y t
 set mod x t
-set no
+set nomatch
 sic edit vi
 g\set font DUPLEX
 define command vloop         "@oldpwd/vloop.class" "oldpwd/vloop.hlp"
@@ -19,23 +19,23 @@ define command ttag          "@oldpwd/tag.class"   "oldpwd/tag.hlp"
 define command rspec         "@oldpwd/rspec.class" "oldpwd/rspec.hlp"
 define command rrms          "@oldpwd/rrms.class"
 define command c1            "@oldpwd/c1.class"    "oldpwd/c1.hlp"
-define command c2            "@oldpwd/c2.class"    !"oldpwd/c1.hlp"
+define command c2            "@oldpwd/c2.class"    
 define command ana           "@oldpwd/ana.class"
 define command wout          "@oldpwd/wout.class"
 define command gbt2class     "@oldpwd/convert.class"
-define command error         "@oldpwd/error.class" "oldpwd/error.hlp"
+define command error         "@oldpwd/error.class"  "oldpwd/error.hlp"
 define command allan_v       "@oldpwd/allan.class"
 define command lumisun       "@oldpwd/luminositysun.class" "oldpwd/luminositysun.hlp"
-define command lluminosity   "@oldpwd/lluminosity.class" "oldpwd/lluminosity.hlp"
-define command sssb          "@oldpwd/SourceGau.class" "oldpwd/SourceGau.hlp"
-define command splot         "@oldpwd/splot.class" ! "oldpwd/SourceGau.hlp"
-define command dvdr          "@oldpwd/dvdr.class"      "oldpwd/dvdr.hlp"
+define command lluminosity   "@oldpwd/lluminosity.class"   "oldpwd/lluminosity.hlp"
+define command sssb          "@oldpwd/SourceGau.class"     "oldpwd/SourceGau.hlp"
+define command splot         "@oldpwd/splot.class" 
+define command dvdr          "@oldpwd/dvdr.class"          "oldpwd/dvdr.hlp"
 define command massCI10      "@oldpwd/massCI10.class"      "oldpwd/massCI10.hlp"
-define command massCI21      "@oldpwd/massCI21.class"     ! "oldpwd/massCI10.hlp"
+define command massCI21      "@oldpwd/massCI21.class"     
 define command voigt         "@oldpwd/voigt.class"
-define command hanning       "@oldpwd/hanning.class" "oldpwd/hanning.hlp"
-define command readcasa      "@oldpwd/readcasa.class" "oldpwd/readcasa.hlp"
-define command zsmooth       "@oldpwd/zsmooth.class"      "oldpwd/zsmooth.hlp"
+define command hanning       "@oldpwd/hanning.class"       "oldpwd/hanning.hlp"
+define command readcasa      "@oldpwd/readcasa.class"      "oldpwd/readcasa.hlp"
+define command zsmooth       "@oldpwd/zsmooth.class"       "oldpwd/zsmooth.hlp"
 ! for JCMT MALATANG
 define command rmsspec       "@oldpwd/rmsspec.class"
 define command rmsspecpy     "@oldpwd/rmsspecpy.class"
