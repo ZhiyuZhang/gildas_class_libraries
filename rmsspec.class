@@ -22,6 +22,8 @@
 ! TODO: 
 
 ! Questions: Sometimes resampled spectra still do not match consistency. 
+! Questions: If we resample to the same resolution, the noise spectrum would show high 
+! frequency standing wave. But it's gone when we smooth to 2*DV resolution. 
 
 ! CHANGE: change average to stitch -- stitch does not have consistency problem - why? 
 
@@ -93,9 +95,10 @@ cl
 ! ---- channel by channel calculation 
 ! ---- now we only use rms for the noise calculation 
 for i 1 to channels
-compute chan_mean[i]   mean   rg[i,]
-compute chan_noise[i]  rms    rg[i,]
-compute chan_median[i] median rg[i,]
+compute chan_mean[i]   mean   rg[i,] /blanking -1000.0 !-900.0   
+compute chan_noise[i]  rms    rg[i,] /blanking -1000.0 !-900.0 
+compute chan_median[i] median rg[i,] /blanking -1000.0 !-900.0 
+
 next 
 !exam chan_noise
 !pause
@@ -132,11 +135,13 @@ set mod x USER_XMIN USER_XMAX
 ! --- plot the noise spectrum in the lower panel   ---
 let ry_copy ry
 g\set box 3 25 3 10
-let ry chan_noise/sqrt(found)
+let ry chan_noise/sqrt(found) 
 define double meannoise 
-compute meannoise mean ry 
-set mod y 0  meannoise*1.5
+compute meannoise mean chan_noise /blanking -1000.0
+set mod y 0  meannoise*2/sqrt(found)
 spec
+
+
 
 set mod y t
 draw t 5 9  "Noise Spectrum" 
@@ -178,14 +183,14 @@ for i 1 to 40
         
 !     --- calculate the root mean square  
         let       noisewin       noisewin*noisewin
-        compute   noisewinsum    sum  noisewin
+        compute   noisewinsum    sum  noisewin /blanking -1000.0
 !       -- for each window (i), calculate sum for channels within it.  
         let       rmssq[i]      sqrt(noisewinsum/winchans[i])
         
 ! error propagation: https://math.stackexchange.com/questions/123276/error-propagation-on-weighted-mean 
         let AreaNoise[i] abs(w1[i]-w2[i])*rmssq[i]/sqrt(winchans[i])
 
-        compute          ry_copy_sum[i] sum ry_copy_win
+        compute          ry_copy_sum[i] sum ry_copy_win /blanking -1000.0
 
 !       say "---"
 !       say "window, 1 2: "   'intchan1' 'intchan2'
@@ -216,4 +221,5 @@ for i 1 to 40
         say "-----------------------------------------" 
      endif 
 next
+
 
