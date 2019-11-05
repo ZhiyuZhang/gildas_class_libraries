@@ -1,12 +1,12 @@
 define double smm
 let smm &1
 
-sic dele smm.jcmt
-file out smm.jcmt s
+sic dele smm.30m
+file out smm.30m s
 for i 1 to found
     get idx%num[i]
     sm box smm
     write i
 next
-file in smm.jcmt
+file in smm.30m
 find

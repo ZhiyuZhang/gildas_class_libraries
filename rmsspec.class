@@ -32,14 +32,22 @@
 ! written by Zhiyu Zhang
 ! pmozhang@gmail.com
 ! last update 19 Dec. 2018 
+! last update 30 Oct. 2019 
+
 
 
 set velo L
 set var bas read
-define double window1 window2
+define double window1 window2 vmin vmax
+
 
 cl
 set unit v
+
+
+let vmin R%HEAD%PLO%VMIN 
+let vmax R%HEAD%PLO%VMAX 
+
 
 
 define char*50 med
@@ -127,6 +135,8 @@ box n n
 axis YL
 set mod x t
 greg averaged_spectrum /format 
+
+set mod x vmin vmax 
 
 
 !  ---------------------------------------------------
