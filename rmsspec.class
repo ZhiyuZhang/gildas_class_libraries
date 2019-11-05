@@ -33,22 +33,17 @@
 ! pmozhang@gmail.com
 ! last update 19 Dec. 2018 
 ! last update 30 Oct. 2019 
+! last update 05 Nov. 2019 
+
 
 
 
 set velo L
 set var bas read
 set mod  y t
-define double window1 window2 vmin vmax
-
 
 cl
-set unit v
-
-
-!let vmin R%HEAD%PLO%VMIN 
-!let vmax R%HEAD%PLO%VMAX 
-
+set unit v 
 
 
 define char*50 med
@@ -60,28 +55,23 @@ endif
 
 set box default
 stitch
-base
 pl
 
-!if  exist(W1) then 
 if  SET%LAS%NWIND.ge.1 then 
-   if W1[1].ne.0 then 
-   say "window defined" 
+   if W1[1].ne.0.0 then 
+       say "window defined" 
    else
-   say "window not defined"
-   set win
+       say "window not defined"
+       set win
    endif
 else 
    say "window not defined"
    set win
 endif
 
-
-let window1 w1[1] 
-let window2 w2[1] 
+base
 
 
-bas 
 
 ! ---  define several different output
 
@@ -94,11 +84,9 @@ define inte   intchan1 intchan2
 ! --- load index 
 load /nocheck spec
 ! --- get the rg% variable 
-set win 0 0
 base /index
 pl /index
 
-set win window1 window2
 
 cl
 
@@ -137,7 +125,6 @@ axis YL
 set mod x t
 greg averaged_spectrum /format 
 
-!set mod x vmin vmax 
 set mod x t
 
 
@@ -149,9 +136,6 @@ g\set box 3 25 3 10
 let ry chan_noise/sqrt(found)
 define double meannoise 
 compute meannoise mean ry 
-!say 'maxnoise'
-!set mod y 0 'maxnoise'
-
 set mod y 0  meannoise*1.5
 spec
 
