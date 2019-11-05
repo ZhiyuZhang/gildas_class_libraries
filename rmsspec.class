@@ -45,9 +45,6 @@ cl
 set unit v
 
 
-let vmin R%HEAD%PLO%VMIN 
-let vmax R%HEAD%PLO%VMAX 
-
 
 
 define char*50 med
@@ -61,6 +58,11 @@ set box default
 stitch
 base
 pl
+
+let vmin R%HEAD%PLO%VMIN 
+let vmax R%HEAD%PLO%VMAX 
+
+
 
 !if  exist(W1) then 
 if  SET%LAS%NWIND.ge.1 then 
