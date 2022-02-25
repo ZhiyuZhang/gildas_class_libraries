@@ -1,6 +1,13 @@
 pl
 cl
-las\box
-las\spec
+g\box   
+greg\hist rx ry /fill 5 /base 
+greg\hist rx ry 
+base 1 /pl
 ANALYSE\DRAW  t 5 13.5 'source'
-!ANALYSE\DRAW  t 12 16.5 "Rest Frequency (MHz)"
+label "Velocity [km s\U-\U1]" /x 
+label "T\Dm\Db" /Y 
+
+
+
+
